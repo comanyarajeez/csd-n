@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arajeez - Certificate Verification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --success-color: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--light-color);
+        }
+        
+        /* Language Toggle */
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+        }
+        
+        .lang-toggle button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-toggle button.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .lang-toggle button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Certificate Section */
+        .certificate-section {
+            padding: 2rem 0;
+        }
+        
+        .certificate-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .certificate-header {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .certificate-id {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        
+        .validity-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            min-width: 90px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            margin-top: 5px;
+            color: white;
+        }
+        
+        .certificate-body {
+            padding: 2rem;
+        }
+        
+        .certificate-details {
+            margin-top: 1.5rem;
+        }
+        
+        .detail-item {
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            min-width: 140px;
+            color: var(--dark-color);
+        }
+        
+        .detail-value {
+            flex: 1;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+            background: #e8f6ef;
+            color: #2ecc71;
+            border: 2px solid #2ecc71;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        .certificate-footer {
+            background: var(--light-color);
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .verification-note {
+            background: #fff8e1;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid #ffc107;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .watermark {
+            position: absolute;
+            opacity: 0.03;
+            font-size: 20rem;
+            font-weight: bold;
+            z-index: -1;
+            user-select: none;
+            color: var(--primary-color);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: var(--light-color);
+            padding: 3rem 0;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .contact-info h3:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary-color);
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-detail i {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-left: 15px;
+            margin-top: 3px;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .captcha-container {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            border: 1px solid #ddd;
+        }
+        
+        .captcha-checkbox {
+            display: flex;
+            align-items: center;
+        }
+        
+        .captcha-checkbox input {
+            margin-left: 10px;
+        }
+        
+        .captcha-logo {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+        
+        .captcha-logo img {
+            width: 24px;
+            margin-left: 10px;
+        }
+        
+        .btn-submit {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-submit:hover {
+            background: var(--primary-color);
+        }
+        
+        /* Popup Menu Styles */
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            width: 90%;
+            max-width: 350px;
+            z-index: 1000;
+            animation: popIn 0.5s ease-out;
+        }
+        
+        .popup-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .popup-logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+        
+        .popup-body {
+            padding: 1.5rem;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .menu-list {
+            list-style: none;
+        }
+        
+        .menu-list li {
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .menu-list li:hover {
+            background: var(--light-color);
+            transform: translateX(5px);
+        }
+        
+        .menu-list li i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+            width: 20px;
+        }
+        
+        .popup-footer {
+            background: var(--light-color);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        .menu-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-btn:hover {
+            background: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+            margin-top: 10px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            .lang-toggle {
+                margin-top: 1rem;
+            }
+            
+            .countdown-container {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-item {
+                min-width: 70px;
+            }
+            
+            .countdown-value {
+                font-size: 1.5rem;
+            }
+            
+            .detail-item {
+                flex-direction: column;
+            }
+            
+            .detail-label {
+                margin-bottom: 0.5rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .watermark {
+                font-size: 10rem;
+            }
+        }
+        
+        /* Animation for countdown */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .countdown-item {
+            animation: pulse 2s infinite;
+        }
+        
+        .countdown-item:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        
+        .countdown-item:nth-child(3) {
+            animation-delay: 1s;
+        }
+        
+        .countdown-item:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-certificate"></i>
+                <span>Arajeez</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Training Programs</a></li>
+                    <li><a href="#">Certificate Verification</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="lang-toggle">
+                <button id="lang-en" class="active">English</button>
+                <button id="lang-ar">العربية</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Certificate Section -->
+    <section class="certificate-section">
+        <div class="container">
+            <div class="watermark">AEC</div>
+            
+            <div class="certificate-card">
+                <div class="certificate-header">
+                    <div class="certificate-id">AEC-251157450</div>
+                    <div class="validity-text">Certificate Valid for:</div>
+                    
+                    <div class="countdown-container">
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="days">361</div>
+                            <div class="countdown-label">Days</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="hours">14</div>
+                            <div class="countdown-label">Hrs</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="minutes">45</div>
+                            <div class="countdown-label">Min</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="seconds">40</div>
+                            <div class="countdown-label">Sec</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-body">
+                    <div class="verification-note">
+                        <i class="fas fa-info-circle"></i> This certificate has been successfully verified in our system.
+                    </div>
+                    
+                    <p>This to confirm that the document Number <strong>(AEC-251157450)</strong> is issued by <strong>(Arajeez Engineering Co.)</strong> for the mean of <strong>(3rd Party Inspection)</strong> for the Respected <strong>(Self Employed)</strong> on date of <strong>(2025-09-02 09:44:20)</strong> in regard for:</p>
+                    
+                    <div class="certificate-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Equipment:</span>
+                            <span class="detail-value">EXCAVATOR</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Manufactured by:</span>
+                            <span class="detail-value">HITACHI/2009</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Serial Number:</span>
+                            <span class="detail-value">HCM1G600K00112434</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Plate Number:</span>
+                            <span class="detail-value">A 6297 BASRA</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Capacity:</span>
+                            <span class="detail-value">Bucket Capacity: 1.3 m3</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Issue Date:</span>
+                            <span class="detail-value">2025-09-02 09:44:20</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Due Date:</span>
+                            <span class="detail-value">2026-09-01 09:44:20</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Final Status:</span>
+                            <span class="detail-value"><span class="status-badge">Accepted</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-print"></i> Print Certificate
+                        </button>
+                        <a href="https://wa.me/9647800140560" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="certificate-footer">
+                    <p>For verification purposes, this certificate can be validated online at https://certificates.arajeez.net</p>
+                    <p>© 2025 Arajeez Engineering Co. All rights reserved.</p>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p>If you need more information you can contact us through the information below or you can send a direct message via WhatsApp using the button below</p>
+                
+                <div class="contact-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Address</h4>
+                        <p>Said Amin Street, Al Bradhiah, Basra, Iraq</p>
+                    </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@arajeez.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+964 780 014 0560</p>
+                    </div>
+                </div>
+                
+                <a href="https://wa.me/9647800140560" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container contact-container">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                
+                <p>Arajeez is a flexible and innovative Iraqi company providing products and services related to oil, gas, petrochemical and construction industries. We are registered and headquartered in the city of Basrah.</p>
+                
+                <div class="contact-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Address</h4>
+                        <p>Said Amin Street, Al Bradhiah, Basra, Iraq</p>
+                    </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@arajeez.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+964 780 014 0560</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Send Message</h3>
+                
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" placeholder="Message subject">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" placeholder="Enter your message"></textarea>
+                </div>
+                
+                <div class="captcha-container">
+                    <div class="captcha-checkbox">
+                        <input type="checkbox" id="captcha">
+                        <label for="captcha">I'm not a robot</label>
+                    </div>
+                    <div class="captcha-logo">
+                        <span>reCAPTCHA</span>
+                        <span>Privacy - Terms</span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-submit">Send Message</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>Arajeez is a flexible and innovative Iraqi company providing products and services related to oil, gas, petrochemical and construction industries.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Training Programs</a></li>
+                        <li><a href="#">Certificate Verification</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Basra, Iraq</li>
+                        <li><i class="fas fa-phone"></i> +964 780 014 0560</li>
+                        <li><i class="fas fa-envelope"></i> info@arajeez.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© Copyright Arajeez. All Rights Reserved.</p>
+                <p>Designed by Arajeez Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Menu Button -->
+    <button class="menu-btn" id="menuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Popup Menu -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup-container" id="popup">
+        <button class="close-btn" id="closePopup">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="popup-header">
+            <div class="popup-logo">ArAJEEZ</div>
+            <div class="logo-subtitle">Engineering Solutions</div>
+        </div>
+        
+        <div class="popup-body">
+            <ul class="menu-list">
+                <li><i class="fas fa-home"></i> Home</li>
+                <li><i class="fas fa-building"></i> Subsidiaries</li>
+                <li><i class="fas fa-cogs"></i> Services</li>
+                <li><i class="fas fa-box"></i> Products</li>
+                <li><i class="fas fa-briefcase"></i> Career</li>
+                <li><i class="fas fa-handshake"></i> Work With Us</li>
+                <li><i class="fas fa-envelope"></i> Contact Us</li>
+            </ul>
+        </div>
+        
+        <div class="popup-footer">
+            © 2023 Arajeez. All Rights Reserved.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start countdown timer
+            function startCountdown() {
+                const countDownDate = new Date("Sep 1, 2026 09:44:20").getTime();
+                
+                function updateCountdown() {
+                    const now = new Date().getTime();
+                    const distance = countDownDate - now;
+                    
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    document.getElementById("days").textContent = days;
+                    document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+                    document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+                    document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+                }
+                
+                // Update countdown immediately and then every second
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            }
+            
+            startCountdown();
+            
+            // Print certificate functionality
+            const printBtn = document.querySelector('.btn-primary');
+            printBtn.addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Popup menu functionality
+            const menuBtn = document.getElementById('menuBtn');
+            const closePopupBtn = document.getElementById('closePopup');
+            const overlay = document.getElementById('overlay');
+            const popup = document.getElementById('popup');
+            
+            menuBtn.addEventListener('click', function() {
+                popup.style.display = 'block';
+                overlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closePopupBtn.addEventListener('click', closePopup);
+            overlay.addEventListener('click', closePopup);
+            
+            function closePopup() {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Close popup when pressing Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closePopup();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
