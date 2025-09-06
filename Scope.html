@@ -1,0 +1,168 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Certificate Verification</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6eeda;
+      --card:#ffffff;
+      --accent:#ff6f2d;
+      --text:#222;
+      --muted:#6b6b6b;
+      --container-width:980px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Rubik,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0; background:linear-gradient(180deg,var(--bg),#fff 40%); color:var(--text)}/* header */
+.site-header{background:white; padding:18px 20px; box-shadow:0 1px 0 rgba(0,0,0,0.04); position:sticky; top:0; z-index:20}
+.header-inner{max-width:var(--container-width); margin:0 auto; display:flex; align-items:center; justify-content:space-between}
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{height:40px}
+.menu-btn{width:44px; height:44px; border-radius:8px; display:flex; align-items:center; justify-content:center}
+.menu-btn svg{width:26px;height:26px}
+
+/* main card */
+.wrap{max-width:var(--container-width); margin:28px auto; padding:0 18px}
+.card{background:var(--card); border-radius:6px; box-shadow:0 6px 24px rgba(20,20,40,0.06); padding:36px}
+h1{font-size:36px; margin:0 0 18px; text-align:center; font-weight:600}
+.lead{color:var(--muted); text-align:center; margin-bottom:22px}
+
+.details{display:flex; gap:28px; align-items:flex-start; margin-bottom:26px}
+.detail-list{flex:1}
+.detail-item{margin-bottom:12px}
+.detail-item b{display:inline-block; width:140px}
+.certificate-box{flex:1; background:#f8f6f3; border-radius:6px; padding:16px; border:1px solid rgba(0,0,0,0.03)}
+
+/* inner certificate preview */
+.cert-preview{width:100%; background:linear-gradient(180deg,#fff,#fff); padding:18px; border-radius:6px; border:1px solid rgba(0,0,0,0.04)}
+.cert-image{width:100%; display:block}
+
+/* footer area for spacing */
+.spacer{height:20px}
+
+/* small screens */
+@media (max-width:880px){
+  h1{font-size:28px}
+  .details{flex-direction:column}
+  .detail-item b{width:120px}
+}
+
+/* styles to mimic certificate look inside preview (not editable from outside image) */
+.mock-certificate{position:relative; border-radius:6px; overflow:hidden; background:#fff; min-height:380px; box-shadow:inset 0 0 0 1px rgba(0,0,0,0.02)}
+.mock-top{height:56px; background:linear-gradient(90deg,var(--accent),#f4a36a);}
+.mock-body{padding:18px 20px}
+.mock-title{font-size:22px; text-align:center; color:#2b87c8; font-weight:600}
+.mock-meta{display:flex; gap:12px; align-items:flex-start; margin-top:14px}
+.mock-photo{width:90px; height:110px; background:#eee; border:1px solid rgba(0,0,0,0.06); margin-left:auto}
+.mock-qr{width:84px; height:84px; background:#eee; border:1px solid rgba(0,0,0,0.06)}
+.mock-footer{position:absolute; bottom:0; left:0; right:0; height:50px; background:linear-gradient(90deg,#ffeddc,#fff); display:flex; align-items:center; justify-content:center}
+
+/* small print */
+.small{font-size:12px; color:var(--muted)}
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="/path/to/logo.png" alt="Scope logo" />
+        <div class="small">SCOPE<br><span style="font-weight:600;">Petroleum Services</span></div>
+      </div>
+      <button class="menu-btn" aria-label="menu">
+        <!-- simple hamburger -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
+  </header>  <main class="wrap">
+    <div class="card">
+      <h1>Certificate Verification</h1>
+      <p class="lead">This certificate is original and produced by Scope petroleum Services</p><div class="details">
+    <div class="detail-list">
+      <div class="detail-item"><b>Client Name:</b> <span id="client-name">Nassem al arjawan</span></div>
+      <div class="detail-item"><b>Certificate No.:</b> <span id="cert-no">ST-10642-07</span></div>
+      <div class="detail-item"><b>Expire Date:</b> <span id="expire">22-Jun-2026</span></div>
+    </div>
+
+    <div class="certificate-box">
+      <!-- This area is a preview of the certificate. In the screenshot the whole certificate is an image. Replace the image below with the real scanned certificate. -->
+      <div class="cert-preview">
+        <!-- You can either use an actual scanned image like <img src="certificate-scan.jpg"> or build it in HTML as below. For exact look, put the scanned certificate image here. -->
+
+        <!-- Example: scanned image (recommended for exact copy) -->
+        <!-- <img class="cert-image" src="/path/to/certificate-scan.jpg" alt="Certificate"> -->
+
+        <!-- OR build a mock certificate in HTML (keeps text selectable) -->
+        <div class="mock-certificate">
+          <div class="mock-top"></div>
+          <div class="mock-body">
+            <div class="mock-title">Certificate of Training</div>
+
+            <div style="display:flex; gap:12px; margin-top:14px; align-items:flex-start">
+              <div style="flex:1">
+                <p style="margin:8px 0"><strong>Name:</strong> <span id="name-inside">SHAALAN RAZAK JASEM</span></p>
+                <p style="margin:8px 0"><strong>Whilst in the Employment of:</strong> <span style="font-weight:600">NASSEM AL-ARJWAN CO.</span></p>
+                <p style="margin:8px 0"><strong>Has successfully completed the training course for</strong></p>
+                <h3 style="margin:6px 0 12px; color:#1976d2;">Defensive Driving Training</h3>
+
+                <div style="display:flex; gap:10px; align-items:center; margin-top:10px">
+                  <div>
+                    <div class="small">Certificate No.</div>
+                    <div style="font-weight:600">ST-10642-07</div>
+                  </div>
+                  <div>
+                    <div class="small">Issue Date</div>
+                    <div style="font-weight:600">23 / June / 2025</div>
+                  </div>
+                  <div>
+                    <div class="small">Due Date</div>
+                    <div style="font-weight:600" id="due-date">22 / June / 2026</div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div style="width:140px; display:flex; flex-direction:column; gap:10px; align-items:center">
+                <div class="mock-photo">
+                  <!-- replace with actual person photo: <img src="photo.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+                </div>
+                <div class="mock-qr">
+                  <!-- replace with QR image: <img src="qr.png" style="width:100%;height:100%"> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-footer small">Scope Petroleum Services &nbsp; · &nbsp; training@scopeps.com</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <p class="small" style="text-align:center">SPS-IMS-F283 &nbsp;&nbsp; Rev.00</p>
+</div>
+
+  </main>  <script>
+    // small script to allow easy replacement of fields (you can also edit HTML directly)
+    // Example: change client name dynamically
+    const data = {
+      clientName: 'Nassem al arjawan',
+      certNo: 'ST-10642-07',
+      expire: '22-Jun-2026',
+      insideName: 'SHAALAN RAZAK JASEM',
+      dueDate: '22 / June / 2026'
+    }
+    document.getElementById('client-name').textContent = data.clientName;
+    document.getElementById('cert-no').textContent = data.certNo;
+    document.getElementById('expire').textContent = data.expire;
+    document.getElementById('name-inside').textContent = data.insideName;
+    document.getElementById('due-date').textContent = data.dueDate;
+  </script></body>
+</html>
