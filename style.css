@@ -1,0 +1,74 @@
+body{
+  margin:0;
+  font-family:Arial;
+  background:#ddd;
+}
+.controls{
+  background:#fff;
+  padding:10px;
+}
+.controls input, .controls button{
+  width:100%;
+  margin-bottom:6px;
+  padding:6px;
+}
+.certificate{
+  position:relative;
+  width:794px;
+  height:1123px;
+  margin:10px auto;
+  background:url("bg.jpg") no-repeat center;
+  background-size:cover;
+}
+.name{
+  position:absolute;
+  top:300px;
+  width:100%;
+  text-align:center;
+  font-size:32px;
+  font-weight:bold;
+}
+.title{
+  position:absolute;
+  top:500px;
+  width:100%;
+  text-align:center;
+  font-size:18px;
+}
+.machine{
+  position:absolute;
+  top:540px;
+  width:100%;
+  text-align:center;
+  font-size:16px;
+}
+.photo{
+  position:absolute;
+  top:380px;
+  left:330px;
+  width:130px;
+  border-radius:10px;
+}
+.qr{
+  position:absolute;
+  bottom:130px;
+  right:90px;
+  width:120px;
+}
+.date1{
+  position:absolute;
+  bottom:200px;
+  left:90px;
+  font-size:14px;
+}
+.date2{
+  position:absolute;
+  bottom:180px;
+  left:90px;
+  font-size:14px;
+}
+@media print{
+  body *{visibility:hidden;}
+  .certificate,.certificate *{visibility:visible;}
+  .certificate{margin:0;}
+}
