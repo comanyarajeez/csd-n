@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>وزارة النفط - تصريح أمني</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif; 
+            background: #fff; 
+            padding: 20px; 
+            direction: rtl;
+            color: #000;
+        }
+        .permit-container {
+            max-width: 210mm; /* A4 width */
+            margin: 0 auto;
+            border: 4px double #000;
+            padding: 15px 20px;
+            background: #fff;
+            position: relative;
+            min-height: 280mm;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .header .ministry {
+            font-size: 14pt;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .header .dept {
+            font-size: 12pt;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+        .header .dept2 {
+            font-size: 11pt;
+            margin-top: 2px;
+        }
+        
+        /* Address block */
+        .address-block {
+            text-align: right;
+            margin: 10px 0 15px;
+            font-size: 12pt;
+            font-weight: 600;
+        }
+        .address-block .to {
+            font-size: 13pt;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        
+        /* Subject */
+        .subject {
+            text-align: center;
+            font-size: 13pt;
+            font-weight: 700;
+            margin: 15px 0;
+            border: 1px solid #000;
+            display: inline-block;
+            padding: 4px 20px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Main table */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 11pt;
+        }
+        .main-table td {
+            border: 1px solid #000;
+            padding: 6px 8px;
+            vertical-align: top;
+        }
+        .main-table .label-cell {
+            background: #f0f0f0;
+            font-weight: 700;
+            width: 30%;
+            font-size: 10pt;
+        }
+        .main-table .value-cell {
+            font-weight: 600;
+            font-size: 12pt;
+        }
+        
+        /* Notes */
+        .notes {
+            font-size: 10pt;
+            margin: 10px 0;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+        
+        /* QR note */
+        .qr-note {
+            text-align: center;
+            font-size: 9pt;
+            font-weight: 600;
+            margin: 10px 0;
+            border: 1px solid #000;
+            padding: 5px;
+            background: #f9f9f9;
+        }
+        
+        /* Persons & Vehicles table */
+        .sub-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 9pt;
+        }
+        .sub-table td, .sub-table th {
+            border: 1px solid #000;
+            padding: 4px 5px;
+            text-align: center;
+        }
+        .sub-table th {
+            background: #e0e0e0;
+            font-weight: 700;
+            font-size: 8pt;
+        }
+        
+        /* Signatures */
+        .signatures {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 10pt;
+            font-weight: 600;
+        }
+        .sig-block {
+            width: 120px;
+        }
+        .sig-block .name {
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 2px;
+        }
+        
+        /* Footer */
+        .footer-notes {
+            margin-top: 20px;
+            font-size: 8pt;
+            border-top: 1px solid #000;
+            padding-top: 8px;
+            line-height: 1.5;
+        }
+        
+        /* Seal placeholder */
+        .seal {
+            position: absolute;
+            top: 80px;
+            left: 40px;
+            width: 90px;
+            height: 90px;
+            border: 3px solid #c00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 8pt;
+            font-weight: 700;
+            color: #c00;
+            opacity: 0.7;
+            transform: rotate(-15deg);
+        }
+        
+        /* Download button */
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #1a3e5c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 14pt;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1000;
+            font-family: 'Cairo', sans-serif;
+        }
+        .download-btn:hover { background: #2a5a7c; }
+        
+        @media print {
+            body { padding: 0; background: white; }
+            .permit-container { border: none; padding: 0; max-width: 100%; }
+            .download-btn { display: none; }
+            .seal { position: absolute; }
+        }
+    </style>
+</head>
+<body>
+    <button class="download-btn" onclick="downloadPDF()">📥 تحميل PDF</button>
+
+    <div class="permit-container" id="permit-content">
+        <!-- المحتوى يملأ تلقائياً -->
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const permitId = urlParams.get('id');
+        
+        function buildPermitHTML(data) {
+            if (!data) return '<div style="text-align:center;padding:50px;font-size:18pt;color:red;">❌ التصريح غير موجود</div>';
+            
+            // Build persons table
+            let personsHTML = '';
+            if (data.persons && data.persons.length > 0) {
+                personsHTML = `<table class="sub-table"><tr><th>المنتسبين العراقيين</th><th>ت</th><th>المنتسبين العراقيين</th><th>ت</th><th>المنتسبين العراقيين</th><th>ت</th><th>المنتسبين العراقيين</th><th>ت</th></tr>`;
+                for (let i = 0; i < data.persons.length; i += 4) {
+                    personsHTML += '<tr>';
+                    for (let j = 0; j < 4; j++) {
+                        if (data.persons[i+j]) {
+                            personsHTML += `<td>${data.persons[i+j].name}</td><td>${data.persons[i+j].num || (i+j+1)}</td>`;
+                        } else {
+                            personsHTML += '<td></td><td></td>';
+                        }
+                    }
+                    personsHTML += '</tr>';
+                }
+                personsHTML += '</table>';
+            }
+            
+            // Build vehicles table
+            let vehiclesHTML = '';
+            if (data.vehicles && data.vehicles.length > 0) {
+                vehiclesHTML = `<table class="sub-table"><tr><th>اسم ورقم العجلة والنوع</th><th>ت</th><th>اسم ورقم العجلة والنوع</th><th>ت</th></tr>`;
+                for (let i = 0; i < data.vehicles.length; i += 2) {
+                    vehiclesHTML += '<tr>';
+                    for (let j = 0; j < 2; j++) {
+                        if (data.vehicles[i+j]) {
+                            vehiclesHTML += `<td>${data.vehicles[i+j].desc}</td><td>${data.vehicles[i+j].seq || (i+j+1)}</td>`;
+                        } else {
+                            vehiclesHTML += '<td></td><td></td>';
+                        }
+                    }
+                    vehiclesHTML += '</tr>';
+                }
+                vehiclesHTML += '</table>';
+            }
+            
+            return `
+                <div class="seal">الجمهورية العراقية<br>وزارة النفط<br>ختم رسمي</div>
+                
+                <div class="header">
+                    <div class="ministry">وزارة النفط</div>
+                    <div class="dept">قسم التصاريح الأمنية</div>
+                    <div class="dept2">شعبة التصاريح الأمنية - المنطقة الجنوبية</div>
+                </div>
+                
+                <div class="address-block">
+                    <div class="to">الى / لواء شرطة الطاقة الثامن</div>
+                    <div>لواء شرطة الطاقة التاسع</div>
+                </div>
+                
+                <div class="subject">م / تصريح أمني - اصدار</div>
+                
+                <table class="main-table">
+                    <tr><td class="label-cell">رقم التصريح الأمني</td><td class="value-cell">${data.id}</td></tr>
+                    <tr><td class="label-cell">اسم الشركة باللغة العربية</td><td class="value-cell">${data.companyAr}</td></tr>
+                    <tr><td class="label-cell">اسم الشركة باللغة الإنجليزية</td><td class="value-cell">${data.companyEn}</td></tr>
+                    <tr><td class="label-cell">المواقع المسموح بالدخول اليها</td><td class="value-cell">${data.locations}</td></tr>
+                    <tr><td class="label-cell">تاريخ بدأ التصريح</td><td class="value-cell">${data.startDate}</td></tr>
+                    <tr><td class="label-cell">تاريخ انتهاء التصريح</td><td class="value-cell">${data.endDate}</td></tr>
+                </table>
+                
+                <div class="notes">
+                    يسمح بالدخول لكادر الشركة أعلاه والمدرج اسمائهم في القوائم المرفقة ربطاً وحسب الفترة المبينة تفاصيلها اعلاه على ان يخضع الجميع للتفتيش الدقيق وحسب الفترة والمواقع المذكورة أعلاه.
+                </div>
+                
+                <div class="qr-note">
+                    للتأكد من صحة التصريح يرجى مسح (QR CODE) الموجود خلف التصريح.
+                </div>
+                
+                ${personsHTML}
+                ${vehiclesHTML}
+                
+                <div class="signatures">
+                    <div class="sig-block"><div class="name">مسؤول</div><div>شعبة التصاريح الأمنية</div><div>المنطقة الجنوبية</div></div>
+                    <div class="sig-block"><div class="name">فيصل</div><div>فيصل</div></div>
+                    <div class="sig-block"><div class="name">فيصل</div><div>فيصل</div></div>
+                    <div class="sig-block"><div class="name">فيصل</div><div>فيصل</div></div>
+                </div>
+                
+                <div class="footer-notes">
+                    <p>- شركة غاز البصرة - قسم الامن والعادات - كتابكم المرقم 4059 في 11/2025</p>
+                    <p>- شعبة استخبارات شرطة الطاقة (17,18) ... للتفضل بالاطلاع مع التقدير</p>
+                    <p>- اللجنة الأمنية العليا في محافظة البصرة ... للتفضل بالاطلاع مع التقدير</p>
+                    <p>- الافبارة المركزية.</p>
+                    <p>- يتحمل مدير الشركة الطالبة للتصريح كافة التبعات القانونية في حالة التلاعب والطلب.</p>
+                    <p>- للحصول على التصريح الأمني تكون المراجعة قبل اسبوعين.</p>
+                </div>
+            `;
+        }
+        
+        // Load data from localStorage (or from data.json in production)
+        function loadPermit() {
+            const allPermits = JSON.parse(localStorage.getItem('permits') || '{}');
+            const data = allPermits[permitId];
+            document.getElementById('permit-content').innerHTML = buildPermitHTML(data);
+        }
+        
+        function downloadPDF() {
+            window.print();
+        }
+        
+        loadPermit();
+    </script>
+</body>
+</html>
