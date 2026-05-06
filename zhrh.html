@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مولّد التصاريح الأمنية - وزارة النفط</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: #1a2035;
+    min-height: 100vh;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  /* ===== FORM PANEL ===== */
+  .form-panel {
+    background: linear-gradient(135deg, #0d1b2a, #1e3a5f);
+    border: 1px solid #2e5e9e;
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+
+  .form-title {
+    color: #f0c040;
+    font-size: 22px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  .form-subtitle {
+    color: #90b8e0;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .form-grid .full { grid-column: 1 / -1; }
+
+  label {
+    display: block;
+    color: #a8c8f0;
+    font-size: 13px;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  input, textarea, select {
+    width: 100%;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid #2e5e9e;
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: #f0c040;
+    background: rgba(255,255,255,0.1);
+  }
+  input::placeholder, textarea::placeholder { color: #556; }
+  textarea { resize: vertical; min-height: 70px; }
+  select option { background: #1a2035; }
+
+  /* person / vehicle rows */
+  .rows-section { margin-top: 10px; }
+  .rows-label {
+    color: #f0c040;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .row-item {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+  }
+  .row-item input { flex: 1; }
+  .row-item .num-badge {
+    background: #2e5e9e;
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .btn-add, .btn-remove {
+    background: none;
+    border: 1px solid;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .btn-add { border-color: #4caf50; color: #4caf50; }
+  .btn-add:hover { background: #4caf50; color: #fff; }
+  .btn-remove { border-color: #e53935; color: #e53935; }
+  .btn-remove:hover { background: #e53935; color: #fff; }
+
+  .generate-btn {
+    margin-top: 22px;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #c8960a, #f0c040);
+    color: #1a1a00;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: opacity 0.2s, transform 0.1s;
+    box-shadow: 0 4px 20px rgba(240,192,64,0.4);
+  }
+  .generate-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+  .generate-btn:active { transform: translateY(0); }
+
+  /* ===== PRINT ACTIONS ===== */
+  .print-actions {
+    display: none;
+    gap: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 900px;
+    justify-content: center;
+  }
+  .print-actions.visible { display: flex; }
+  .action-btn {
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+  .btn-print { background: #1565c0; color: #fff; }
+  .btn-print:hover { background: #0d47a1; }
+  .btn-reset { background: #c62828; color: #fff; }
+  .btn-reset:hover { background: #b71c1c; }
+
+  /* ===== CLEARANCE DOCUMENT ===== */
+  #clearance-output { display: none; width: 100%; max-width: 900px; }
+  #clearance-output.visible { display: block; }
+
+  .clearance-doc {
+    background: #fff;
+    font-family: 'Tajawal', sans-serif;
+    color: #000;
+    padding: 18px 24px;
+    border: 2px solid #000;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* Header */
+  .doc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    border-bottom: 3px solid #8b0000;
+    padding-bottom: 8px;
+  }
+  .doc-header-ar { text-align: right; }
+  .doc-header-ar .title-big { font-size: 20px; font-weight: 800; color: #8b0000; }
+  .doc-header-ar .title-sub { font-size: 16px; font-weight: 700; }
+  .doc-header-ar .title-region { font-size: 14px; }
+  .doc-header-en { text-align: left; font-size: 12px; font-weight: 700; color: #333; line-height: 1.5; }
+  .doc-logo {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+  }
+  .doc-logo img { width: 100%; }
+  .logo-placeholder {
+    width: 70px; height: 70px;
+    border: 2px solid #8b0000;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #8b0000; text-align: center; font-weight: 700;
+  }
+
+  /* Recipient */
+  .doc-recipient {
+    display: flex;
+    justify-content: space-between;
+    margin: 6px 0;
+    font-size: 13px;
+  }
+  .doc-recipient span { font-weight: 700; }
+
+  /* Badge */
+  .badge-row {
+    display: flex;
+    justify-content: center;
+    margin: 6px 0;
+  }
+  .badge-box {
+    border: 2px solid #000;
+    padding: 4px 30px;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+
+  /* Main info table */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6px 0;
+    font-size: 12.5px;
+  }
+  .info-table td {
+    border: 1px solid #000;
+    padding: 5px 8px;
+    vertical-align: top;
+  }
+  .info-table .label-cell {
+    background: #f0f0f0;
+    font-weight: 700;
+    width: 22%;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .info-table .value-cell {
+    font-weight: 500;
+    direction: rtl;
+  }
+
+  /* Notice */
+  .notice-box {
+    border: 1px solid #000;
+    padding: 6px 10px;
+    font-size: 12px;
+    text-align: center;
+    margin: 6px 0;
+    line-height: 1.7;
+  }
+
+  /* People + Vehicles grid */
+  .grid-section {
+    display: flex;
+    gap: 8px;
+    margin: 6px 0;
+  }
+  .grid-block { flex: 1; }
+  .grid-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+  }
+  .grid-table th {
+    background: #1a1a6e;
+    color: #fff;
+    padding: 4px 6px;
+    border: 1px solid #000;
+    text-align: center;
+    font-size: 12px;
+  }
+  .grid-table td {
+    border: 1px solid #000;
+    padding: 3px 6px;
+    text-align: right;
+  }
+  .grid-table td.num { text-align: center; width: 28px; background: #e8e8e8; font-weight: 700; }
+  .grid-table tr:nth-child(even) td { background: #f8f8f8; }
+  .grid-table tr:nth-child(even) td.num { background: #ddd; }
+
+  /* Footer row: vehicles note + QR + signature */
+  .doc-footer {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 8px;
+    border-top: 1px solid #000;
+    padding-top: 8px;
+  }
+  .footer-notes { flex: 1; font-size: 11.5px; line-height: 1.8; }
+  .footer-notes .note-title { font-weight: 800; font-size: 12px; margin-bottom: 4px; }
+  .footer-notes ul { padding-right: 16px; }
+
+  .footer-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .footer-qr canvas, .footer-qr img { border: 1px solid #000; }
+  .qr-label { font-size: 10px; font-weight: 700; text-align: center; }
+
+  .footer-sig {
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.8;
+    min-width: 130px;
+  }
+  .footer-sig .sig-title { font-weight: 800; font-size: 12px; border-bottom: 1px solid #000; padding-bottom: 3px; margin-bottom: 4px; }
+  .sig-box {
+    width: 100px;
+    height: 50px;
+    border: 1px dashed #999;
+    margin: 0 auto 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #999;
+  }
+
+  /* Doc bottom bar */
+  .doc-bottom {
+    display: flex;
+    justify-content: space-between;
+    background: #1a1a6e;
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 12px;
+    margin-top: 8px;
+    align-items: center;
+    gap: 10px;
+  }
+  .doc-bottom span { display: flex; align-items: center; gap: 6px; }
+
+  /* PAGE 2 */
+  .page2 {
+    background: #fff;
+    font-family: 'Tajawal', sans-serif;
+    color: #000;
+    padding: 18px 24px;
+    border: 2px solid #000;
+    border-top: none;
+    font-size: 13px;
+  }
+  .page2-header {
+    text-align: center;
+    font-weight: 800;
+    font-size: 14px;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 6px;
+  }
+  .page2-header span { color: #8b0000; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .form-panel, .print-actions { display: none !important; }
+    #clearance-output { display: block !important; max-width: 100%; }
+    .clearance-doc, .page2 { border: 1px solid #000; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== FORM ===== -->
+<div class="form-panel">
+  <div class="form-title">🛡️ مولّد التصاريح الأمنية</div>
+  <div class="form-subtitle">وزارة النفط — التصاريح الأمنية — المنطقة الجنوبية</div>
+
+  <div class="form-grid">
+    <div>
+      <label>رقم التصريح الأمني</label>
+      <input id="f_num" placeholder="مثال: 22452" value="22452">
+    </div>
+    <div>
+      <label>اسم الشركة (عربي)</label>
+      <input id="f_company_ar" placeholder="شركة نسيم الارجوان..." value="شركة نسيم الارجوان للنقل والتجهيز والخدمات العامة">
+    </div>
+    <div>
+      <label>اسم الشركة (إنجليزي)</label>
+      <input id="f_company_en" placeholder="Nassem Alarjan" value="Nassem Alarjan">
+    </div>
+    <div>
+      <label>تاريخ بدأ التصريح</label>
+      <input id="f_start" type="date" value="2025-12-28">
+    </div>
+    <div>
+      <label>تاريخ انتهاء التصريح</label>
+      <input id="f_end" type="date" value="2026-05-27">
+    </div>
+    <div class="full">
+      <label>المواقع المسموح بالدخول اليها</label>
+      <textarea id="f_locations" rows="3">خور الزبير مقر شركة غاز البصرة - الرميلة الشمالية NGL - محطات الكيبس CS1 CS2 CS3 CS4 CS5 - محطات الكيبس في الرميلة الجنوبية - المحطة المركزية - المحطة الجنوبية - محطة القرينات - محطة الشامية - محطات الزبير - محطة الرافضية - محطة الزبير محطة مشرف - محطة الحمار - محطة الحمار مشرف - محطات غرب القرنة CS6 CS7 CS8 - مجمع الخزن والتصدير ومرفأ التحميل ام قصر - البرجسيةZTC - موقع ارطاوي معمل BNGL فقط</textarea>
+    </div>
+    <div>
+      <label>رابط QR Code (الموقع الإلكتروني)</label>
+      <input id="f_qr_url" placeholder="https://oilsec.south@oil.gov.iq" value="https://oilsec.south.oil.gov.iq">
+    </div>
+    <div>
+      <label>الجهة المُرسَل اليها</label>
+      <input id="f_to" placeholder="لواء شرطة الطاقة الثامن" value="لواء شرطة الطاقة الثامن / لواء شرطة الطاقة التاسع">
+    </div>
+  </div>
+
+  <!-- PERSONS -->
+  <div class="rows-section">
+    <div class="rows-label">👥 المنتسبون العراقيون</div>
+    <div id="persons-list"></div>
+    <button class="btn-add" onclick="addRow('persons')">＋</button>
+    <span style="color:#aaa;font-size:12px;margin-right:8px">إضافة شخص</span>
+  </div>
+
+  <!-- VEHICLES -->
+  <div class="rows-section" style="margin-top:14px">
+    <div class="rows-label">🚗 أسماء وأرقام العجلات</div>
+    <div id="vehicles-list"></div>
+    <button class="btn-add" onclick="addRow('vehicles')">＋</button>
+    <span style="color:#aaa;font-size:12px;margin-right:8px">إضافة عجلة</span>
+  </div>
+
+  <button class="generate-btn" onclick="generateClearance()">📄 إصدار التصريح</button>
+</div>
+
+<!-- PRINT ACTIONS -->
+<div class="print-actions" id="print-actions">
+  <button class="action-btn btn-print" onclick="window.print()">🖨️ طباعة التصريح</button>
+  <button class="action-btn btn-reset" onclick="resetForm()">↩ إنشاء تصريح جديد</button>
+</div>
+
+<!-- OUTPUT -->
+<div id="clearance-output">
+
+  <!-- PAGE 1 -->
+  <div class="clearance-doc" id="page1">
+
+    <!-- Doc Header -->
+    <div class="doc-header">
+      <div class="doc-header-en">
+        Ministry of Oil<br>Security Clearances<br>Southern Region
+      </div>
+      <div class="logo-placeholder">وزارة<br>النفط</div>
+      <div class="doc-header-ar">
+        <div class="title-big">وزارة النفط</div>
+        <div class="title-sub">التصاريح الأمنيـة</div>
+        <div class="title-region">المنطقـة الجنوبيـة</div>
+      </div>
+    </div>
+
+    <!-- Recipient -->
+    <div class="doc-recipient">
+      <div></div>
+      <div id="out_to">الى / لواء شرطة الطاقة الثامن<br>لواء شرطة الطاقة التاسع</div>
+    </div>
+
+    <!-- Badge -->
+    <div class="badge-row">
+      <div class="badge-box">م / تصريح أمني - اصدار</div>
+    </div>
+
+    <!-- Info table -->
+    <table class="info-table">
+      <tr>
+        <td class="label-cell">رقم التصريح الأمني</td>
+        <td class="value-cell" id="out_num"></td>
+        <td class="label-cell" style="width:10%"></td>
+        <td class="value-cell"></td>
+      </tr>
+      <tr>
+        <td class="label-cell">أسم الشركة باللغة العربية</td>
+        <td class="value-cell" id="out_company_ar"></td>
+        <td class="label-cell"></td>
+        <td class="value-cell"></td>
+      </tr>
+      <tr>
+        <td class="label-cell">اسم الشركة باللغة الإنجليزية</td>
+        <td class="value-cell" id="out_company_en"></td>
+        <td class="label-cell"></td>
+        <td class="value-cell"></td>
+      </tr>
+      <tr>
+        <td class="label-cell">المواقع المسموح بالدخول اليها</td>
+        <td class="value-cell" colspan="3" id="out_locations"></td>
+      </tr>
+      <tr>
+        <td class="label-cell">تاريخ بدأ التصريح</td>
+        <td class="value-cell" id="out_start"></td>
+        <td class="label-cell">تاريخ انتهاء التصريح</td>
+        <td class="value-cell" id="out_end"></td>
+      </tr>
+    </table>
+
+    <!-- Notice -->
+    <div class="notice-box">
+      يسمح بالدخول لكادر الشركة اعلاه والمدرج اسمائهم في القوائم المرفقة ربطاً وحسب الفترة المبينة تفاصيلها اعلاه على ان يخضع الجميع
+      للتفتيش الدقيق وحسب الفقرة والمواقع المذكورة أعلاه.<br>
+      <strong>للتأكد من صحة التصريح يرجس مسح (QR CODE) الموجود خلف التصريح.</strong>
+    </div>
+
+    <!-- Grid: Persons -->
+    <div id="persons-grid-section"></div>
+
+    <!-- Footer -->
+    <div class="doc-footer">
+      <div class="footer-notes">
+        <div class="note-title">ملاحظات:</div>
+        <ul id="out_veh_notes"></ul>
+        <div style="margin-top:6px;font-size:11px">يستخدم التنكر لنقل الماء فقط ان وجد</div>
+      </div>
+      <div class="footer-qr">
+        <div class="qr-label">QR CODE</div>
+        <div id="qrcode-container"></div>
+      </div>
+      <div class="footer-sig">
+        <div class="sig-title">مسؤول<br>شعبة التصاريح الأمنية<br>المنطقة الجنوبية</div>
+        <div class="sig-box">توقيع</div>
+      </div>
+    </div>
+
+    <!-- CC -->
+    <div style="font-size:11.5px;margin-top:6px;border-top:1px solid #ccc;padding-top:5px">
+      <strong>صورة عنه الى :</strong>
+      <ul style="padding-right:20px;margin-top:4px;line-height:2">
+        <li>شركة غاز البصرة - قسم الامن والعلاقات - كتابكم المرقم 4059 في 6/11/2025 للعلم مع التقدير</li>
+        <li>شعبة استخبارات شرطة الطاقة (17،18) ... للتفضل بالاطلاع مع التقدير</li>
+        <li>اللجنة الامنية العليا في محافظة البصرة ... للتفضل بالاطلاع مع التقدير</li>
+        <li>الاضبارة المركزية</li>
+        <li>يتحمل مدير الشركة الطالبة للتصريح كافة التبعات القانونية في حالة التلاعب والحك والشطب</li>
+        <li>للحصول على التصريح الأمني تكون المراجعة قبل اسبوعين</li>
+        <li>A50 - COM3</li>
+      </ul>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="doc-bottom">
+      <span>📞 48626</span>
+      <span>✉ oilsec.south@oil.gov.iq</span>
+      <span>📍 البصرة - مقابل حي الرضا - مجاور المكينة</span>
+    </div>
+  </div><!-- end page1 -->
+
+  <!-- PAGE 2 -->
+  <div class="page2" id="page2" style="display:none">
+    <!-- Same mini header -->
+    <div class="doc-header" style="border-bottom:2px solid #8b0000;padding-bottom:6px;margin-bottom:10px">
+      <div class="doc-header-en" style="font-size:11px">Ministry of Oil<br>Security Clearances<br>Southern Region</div>
+      <div class="logo-placeholder" style="width:55px;height:55px;font-size:9px">وزارة<br>النفط</div>
+      <div class="doc-header-ar">
+        <div style="font-size:17px;font-weight:800;color:#8b0000">وزارة النفط</div>
+        <div style="font-size:14px;font-weight:700">التصاريح الأمنيـة</div>
+        <div style="font-size:12px">المنطقـة الجنوبيـة</div>
+      </div>
+    </div>
+    <div class="badge-row"><div class="badge-box">م / تصريح أمني - اصدار</div></div>
+
+    <div class="page2-header" style="margin-top:10px">
+      الشركة: <span id="p2_company"></span> &nbsp;&nbsp;|&nbsp;&nbsp; تابع للتصريح رقم: <span id="p2_num"></span><br>
+      <span style="font-size:12px;color:#000">للفترة من <span id="p2_start"></span> إلى <span id="p2_end"></span></span>
+    </div>
+
+    <div id="vehicles-grid-p2"></div>
+
+    <div style="margin-top:10px;font-size:11.5px">يستخدم التنكر لنقل الماء فقط ان وجد</div>
+
+    <div style="text-align:center;margin-top:16px">
+      <div style="font-size:12px;font-weight:800;margin-bottom:6px">مسؤول — شعبة التصاريح الأمنية — المنطقة الجنوبية</div>
+      <div class="sig-box" style="margin:0 auto"></div>
+    </div>
+
+    <div class="doc-bottom" style="margin-top:12px">
+      <span>📞 48626</span>
+      <span>✉ oilsec.south@oil.gov.iq</span>
+      <span>📍 البصرة - مقابل حي الرضا - مجاور المكينة</span>
+    </div>
+  </div><!-- end page2 -->
+
+  <!-- PAGE 3: QR verification page -->
+  <div class="clearance-doc" id="page3" style="display:none;text-align:center;padding:40px 24px">
+    <div style="font-size:20px;font-weight:800;color:#8b0000;margin-bottom:4px">وزارة النفط</div>
+    <div style="font-size:14px;margin-bottom:2px">قسم التصاريح الأمنية</div>
+    <div style="font-size:14px;margin-bottom:30px">شعبة التصاريح الجنوبية</div>
+    <div style="font-size:18px;font-weight:800;border:2px solid #000;display:inline-block;padding:8px 40px;margin-bottom:30px">[ صحة صدور ]</div>
+    <br>
+    <div id="qrcode-page3" style="display:inline-block;margin:10px auto"></div>
+    <div style="color:#c00;font-weight:700;font-size:13px;margin-top:20px">نؤيد صحة صدور الوثيقة الورقية بعد مطابقتها الوثيقة الإلكترونية بالباركود</div>
+  </div>
+
+</div><!-- end clearance-output -->
+
+<script>
+// ====== DEFAULT DATA ======
+const defaultPersons = [
+  "عدنان خير الله عبد الحسين","علي حسنين فاضل","علي حسين خذياب","علي سالم مطلك","عواد هادي خلف","احمد لفتة خيرالله","علي حسن فرحان","علي حسين محمد","حسين علي جابر","علاء كامل ورد",
+  "حيدر عبد الرزاق سادود","حسن عطا كريم","خميس خلف كاظم","مرتضى محسن كريدي","سجاد عبد صالح","سعود خالد عبره","مسلم حسن زمام","عبد الرحمن سجاد ريسان","عبداللامير خلف طعيمه",
+  "عبد الله عبد العظيم عبد الخضر","حسن عطا كريم","احمد زكي حمود","احمد سهيل عبد الله","موسى عبيد عويد","ادريس علي فياض","محمد بدر مونس","علي جبار هاشم","حمود لفته خيرالله","ماهر سالم عبد علي","عبدالكريم رحيم عباس"
+];
+
+const defaultVehicles = [
+  "هونداي ستاركس البصرة - اجرة أ 8637","تويوتا بيكب البصرة - حمل F 13570","هيتاشي حفار البصرة - انشائية A 6297","مارسيدس تريلة أربيل - حمل L 25942","جرافة شفل ميسان انشائية A 1580","هيتاشي حفار بابل - انشائية A 17420","جي ام سي يوكون البصرة - خصوصي R 50051","كوماتسو رافعة جانبية بغداد - انشائية و 50071","هيتاشي حفار البصرة - انشائية A 7538","حادلة مطاطية البصرة - انشائية A 5729","هيتاشي حفار ذي قار - انشائية A 6643","جرافة شفل ذي قار - انشائية A 98022","هونداي ستاركس البصرة - اجرة أ 79065","هونداي ستاركس البصرة - اجرة A 98492","مارسيدس كرين هياب أربيل - حمل 184162","هونداي ستاركس البصرة - اجرة A 92064","سكانيا حوضية ماء كربلاء - حمل A 40771","هيتاشي حفار البصرة - انشائية A 5734","مرسيدس اكتروس السليمانية - حمل D 12558","جرافة كريدر القادسية - انشائية A 2734","هيتاشي حفار البصرة - انشائية A 4438","هونداي ستاركس البصرة - اجرة A 48542","هونداي ستاركس البصرة - اجرة أ 70676","هيتاشي حفار ميسان - انشائية A 446","هيتاشي حفار البصرة - انشائية B 9272","هيتاشي حفار البصرة - انشائية A 6286","هيتاشي حفار ميسان - انشائية B 2534"
+];
+
+// ====== INIT ROWS ======
+function initRows() {
+  const pl = document.getElementById('persons-list');
+  const vl = document.getElementById('vehicles-list');
+  pl.innerHTML = ''; vl.innerHTML = '';
+  defaultPersons.forEach(p => addRow('persons', p));
+  defaultVehicles.forEach(v => addRow('vehicles', v));
+}
+
+function addRow(type, val='') {
+  const list = document.getElementById(type+'-list');
+  const idx = list.children.length + 1;
+  const div = document.createElement('div');
+  div.className = 'row-item';
+  div.innerHTML = `
+    <div class="num-badge">${idx}</div>
+    <input type="text" placeholder="${type==='persons'?'اسم المنتسب':'نوع العجلة ورقمها'}" value="${val}">
+    <button class="btn-remove" onclick="this.parentElement.remove(); reindexRows('${type}')">✕</button>
+  `;
+  list.appendChild(div);
+}
+
+function reindexRows(type) {
+  const rows = document.querySelectorAll('#'+type+'-list .row-item');
+  rows.forEach((r,i) => r.querySelector('.num-badge').textContent = i+1);
+}
+
+function getRows(type) {
+  return [...document.querySelectorAll('#'+type+'-list input')].map(i=>i.value.trim()).filter(Boolean);
+}
+
+// ====== GENERATE ======
+function generateClearance() {
+  const num = document.getElementById('f_num').value.trim();
+  const compAr = document.getElementById('f_company_ar').value.trim();
+  const compEn = document.getElementById('f_company_en').value.trim();
+  const startD = document.getElementById('f_start').value;
+  const endD = document.getElementById('f_end').value;
+  const locs = document.getElementById('f_locations').value.trim();
+  const toField = document.getElementById('f_to').value.trim();
+  const qrUrl = document.getElementById('f_qr_url').value.trim() || 'https://oilsec.south.oil.gov.iq';
+
+  const persons = getRows('persons');
+  const vehicles = getRows('vehicles');
+
+  // Fill page1 fields
+  document.getElementById('out_num').textContent = num;
+  document.getElementById('out_company_ar').textContent = compAr;
+  document.getElementById('out_company_en').textContent = compEn;
+  document.getElementById('out_locations').textContent = locs;
+  document.getElementById('out_start').textContent = startD.replace(/-/g,'/');
+  document.getElementById('out_end').textContent = endD.replace(/-/g,'/');
+  document.getElementById('out_to').innerHTML = toField.split('/').map(t=>`الى / ${t.trim()}`).join('<br>');
+
+  // Persons grid on page1 (up to 30 per page)
+  const page1Persons = persons.slice(0,30);
+  buildPersonsGrid('persons-grid-section', page1Persons);
+
+  // Vehicles note
+  const notesEl = document.getElementById('out_veh_notes');
+  notesEl.innerHTML = `<li>جدول العجلات يبدأ بالتسلسل 2 (هونداي ستاركس البصرة - اجرة أ ...) وينتهي بالتسلسل 28</li><li>كاوسكي شفل البصرة انشائية 979...</li>`;
+
+  // QR code page1
+  const qrContainer = document.getElementById('qrcode-container');
+  qrContainer.innerHTML = '';
+  new QRCode(qrContainer, { text: qrUrl, width: 80, height: 80, correctLevel: QRCode.CorrectLevel.M });
+
+  // Page2: vehicles
+  const page2El = document.getElementById('page2');
+  const vehP2 = document.getElementById('vehicles-grid-p2');
+  if (vehicles.length > 0) {
+    page2El.style.display = 'block';
+    document.getElementById('p2_company').textContent = compAr;
+    document.getElementById('p2_num').textContent = num;
+    document.getElementById('p2_start').textContent = startD.replace(/-/g,'/');
+    document.getElementById('p2_end').textContent = endD.replace(/-/g,'/');
+    buildVehiclesGrid(vehP2, vehicles);
+  } else {
+    page2El.style.display = 'none';
+  }
+
+  // Page3: QR
+  const page3El = document.getElementById('page3');
+  page3El.style.display = 'block';
+  const qr3 = document.getElementById('qrcode-page3');
+  qr3.innerHTML = '';
+  new QRCode(qr3, { text: qrUrl, width: 130, height: 130, correctLevel: QRCode.CorrectLevel.M });
+
+  // Show output
+  document.getElementById('clearance-output').classList.add('visible');
+  document.getElementById('print-actions').classList.add('visible');
+  document.getElementById('clearance-output').scrollIntoView({behavior:'smooth'});
+}
+
+function buildPersonsGrid(containerId, persons) {
+  const container = document.getElementById(containerId);
+  // Split into columns of ~10
+  const col1 = persons.slice(0,10);
+  const col2 = persons.slice(10,20);
+  const col3 = persons.slice(20,30);
+
+  let html = '<div class="grid-section">';
+
+  // Build each column
+  [col1,col2,col3].forEach((col, ci) => {
+    if(col.length===0 && ci>0) return;
+    html += `<div class="grid-block"><table class="grid-table">
+      <tr><th>ت</th><th>المنتسبون العراقيون</th></tr>`;
+    col.forEach((name, i) => {
+      const num = ci*10 + i + 1;
+      html += `<tr><td class="num">${num}</td><td>${name}</td></tr>`;
+    });
+    html += `</table></div>`;
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function buildVehiclesGrid(container, vehicles) {
+  const half = Math.ceil(vehicles.length / 2);
+  const col1 = vehicles.slice(0, half);
+  const col2 = vehicles.slice(half);
+
+  let html = '<div class="grid-section">';
+  [col1,col2].forEach((col,ci) => {
+    html += `<div class="grid-block"><table class="grid-table">
+      <tr><th>ت</th><th>اسم ورقم العجلة والنوع</th></tr>`;
+    col.forEach((v,i) => {
+      const num = ci*half + i + 1;
+      html += `<tr><td class="num">${num}</td><td>${v}</td></tr>`;
+    });
+    html += `</table></div>`;
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function resetForm() {
+  document.getElementById('clearance-output').classList.remove('visible');
+  document.getElementById('print-actions').classList.remove('visible');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Init on load
+initRows();
+</script>
+</body>
+</html>
