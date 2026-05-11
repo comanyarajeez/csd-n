@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام شهادات SCOPE</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #E8913A;
+            --primary-blue: #2E5C8A;
+            --dark-gray: #4A4A4A;
+            --light-bg: #F5F5F0;
+            --cream: #FDFCF7;
+            --border-gold: #C9A84C;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Tajawal', 'Open Sans', sans-serif;
+            background: var(--light-bg);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--dark-gray) 0%, #2a2a2a 100%);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 45px; height: 45px;
+            background: linear-gradient(135deg, var(--primary-orange), #d4792a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--primary-orange);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-section { display: none; }
+        .page-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover { transform: translateY(-3px); }
+
+        .stat-icon {
+            width: 50px; height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .stat-icon.blue { background: var(--primary-blue); }
+        .stat-icon.orange { background: var(--primary-orange); }
+        .stat-icon.green { background: #27ae60; }
+        .stat-icon.red { background: #e74c3c; }
+
+        .stat-info h3 {
+            font-size: 1.8rem;
+            color: var(--dark-gray);
+        }
+
+        .stat-info p {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .form-section h2 {
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+            font-family: 'Tajawal', 'Open Sans', sans-serif;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .photo-upload {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .photo-upload:hover {
+            border-color: var(--primary-orange);
+            background: #fff8f0;
+        }
+
+        .photo-upload img {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .photo-upload input { display: none; }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-orange), #d4792a);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(232, 145, 58, 0.4);
+        }
+
+        .btn-secondary { background: var(--primary-blue); color: white; }
+        .btn-success { background: #27ae60; color: white; }
+        .btn-danger { background: #e74c3c; color: white; }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .preview-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .preview-section h2 {
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Certificate Design - Matching PDF */
+        .certificate-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border: 4px solid var(--border-gold);
+            padding: 0;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .certificate-inner {
+            padding: 2.5rem 3rem;
+            position: relative;
+            border: 1px solid #ddd;
+            margin: 8px;
+        }
+
+        .cert-border-frame {
+            position: absolute;
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border: 1px solid var(--border-gold);
+            pointer-events: none;
+        }
+
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 1rem;
+        }
+
+        .cert-logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cert-logo-icon {
+            width: 55px; height: 55px;
+            background: linear-gradient(135deg, var(--primary-orange), #d4792a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+        }
+
+        .cert-logo-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary-blue);
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .cert-logo-text p {
+            font-size: 0.7rem;
+            color: var(--dark-gray);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .cert-photo {
+            width: 90px; height: 110px;
+            border: 3px solid var(--primary-blue);
+            border-radius: 4px;
+            overflow: hidden;
+            background: #f0f0f0;
+            flex-shrink: 0;
+        }
+
+        .cert-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cert-title {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .cert-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-title::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-orange), transparent);
+            margin: 0.8rem auto;
+        }
+
+        .cert-content {
+            text-align: center;
+            line-height: 2.2;
+            font-size: 1.05rem;
+            color: var(--dark-gray);
+            margin: 1.5rem 0;
+        }
+
+        .cert-content .highlight {
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 1.15rem;
+        }
+
+        .cert-content .name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 0.3rem 0;
+        }
+
+        .cert-issuer {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .cert-issuer h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            letter-spacing: 2px;
+        }
+
+        .cert-details {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            padding: 1rem 0;
+            border-top: 2px solid var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .cert-detail-item {
+            text-align: center;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .cert-detail-item .label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cert-detail-item .value {
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-top: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .cert-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .cert-signature {
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .cert-signature .sig-line {
+            width: 140px;
+            height: 2px;
+            background: var(--dark-gray);
+            margin: 0.5rem auto;
+        }
+
+        .cert-signature p {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .cert-qr { text-align: center; }
+        .cert-qr #qrcode { margin: 0 auto; }
+        .cert-qr p {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        .cert-stamp {
+            width: 90px; height: 90px;
+            border: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 0.6rem;
+            text-align: center;
+            transform: rotate(-15deg);
+            opacity: 0.8;
+        }
+
+        .cert-stamp i {
+            font-size: 1.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .cert-legal {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(46, 92, 138, 0.05);
+            border-radius: 8px;
+            font-size: 0.72rem;
+            color: #555;
+            line-height: 1.8;
+            border-right: 4px solid var(--primary-blue);
+        }
+
+        .cert-watermark {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 7rem;
+            color: rgba(46, 92, 138, 0.04);
+            pointer-events: none;
+            letter-spacing: 10px;
+            z-index: 0;
+        }
+
+        .cert-number-display {
+            position: absolute;
+            top: 15px; left: 15px;
+            font-size: 0.75rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Verify Page */
+        .verify-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            text-align: center;
+        }
+
+        .verify-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .verify-icon {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, var(--primary-orange), #d4792a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .verify-box h2 {
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .verify-box p {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .verify-input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .verify-input-group input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .verify-input-group input:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+        }
+
+        .verify-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .verify-result.valid {
+            background: #d4edda;
+            border: 2px solid #27ae60;
+            display: block;
+        }
+
+        .verify-result.invalid {
+            background: #f8d7da;
+            border: 2px solid #e74c3c;
+            display: block;
+        }
+
+        /* Certificates Table */
+        .certificates-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .certificates-table th, .certificates-table td {
+            padding: 1rem;
+            text-align: right;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .certificates-table th {
+            background: var(--light-bg);
+            font-weight: 700;
+            color: var(--dark-gray);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .certificates-table tr:hover { background: #fafafa; }
+
+        .certificates-table .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .certificates-table .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            border-radius: 6px;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #27ae60;
+        }
+
+        .status-expired {
+            background: #f8d7da;
+            color: #e74c3c;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .cert-header {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            .cert-details {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .cert-footer {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+            .certificate-inner { padding: 1.5rem; }
+        }
+
+        /* Print */
+        @media print {
+            .no-print { display: none !important; }
+            .certificate-container {
+                box-shadow: none;
+                border: 4px solid var(--border-gold);
+                page-break-inside: avoid;
+            }
+            body { background: white; }
+        }
+
+        .spinner {
+            display: none;
+            width: 40px; height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem; right: 2rem;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+            display: none;
+        }
+
+        .toast.show { display: block; }
+        .toast.success { background: #27ae60; }
+        .toast.error { background: #e74c3c; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .sample-banner {
+            background: linear-gradient(135deg, var(--primary-blue), #1a3a5c);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .sample-banner button {
+            background: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar no-print">
+        <div class="logo">
+            <div class="logo-icon">🔥</div>
+            <div class="logo-text">
+                <h1>SCOPE</h1>
+                <span>Petroleum Services</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active" onclick="showPage('dashboard')">الرئيسية</a>
+            <a href="#" onclick="showPage('issue')">إصدار شهادة</a>
+            <a href="#" onclick="showPage('certificates')">الشهادات</a>
+            <a href="#" onclick="showPage('verify')">التحقق</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Dashboard -->
+        <div id="dashboard" class="page-section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">📜</div>
+                    <div class="stat-info">
+                        <h3 id="totalCerts">0</h3>
+                        <p>إجمالي الشهادات</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">⚡</div>
+                    <div class="stat-info">
+                        <h3 id="activeCerts">0</h3>
+                        <p>شهادات نشطة</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">✅</div>
+                    <div class="stat-info">
+                        <h3 id="verifiedCount">0</h3>
+                        <p>تم التحقق هذا الشهر</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red">⏰</div>
+                    <div class="stat-info">
+                        <h3 id="expiringSoon">0</h3>
+                        <p>تنتهي قريباً</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>⚡ إصدار سريع</h2>
+                <p style="color: #888; margin-bottom: 1rem;">املأ النموذج لإصدار شهادة جديدة فوراً</p>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="showPage('issue')">📝 الذهاب إلى النموذج</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Issue Certificate -->
+        <div id="issue" class="page-section">
+            <div class="sample-banner no-print">
+                <span>📄 يوجد بيانات نموذجية من PDF مرفق — اضغط لتحميلها</span>
+                <button onclick="loadSampleData()">تحميل بيانات PDF</button>
+            </div>
+
+            <div class="form-section">
+                <h2>📝 إصدار شهادة جديدة</h2>
+                <form id="certForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>رقم الشهادة *</label>
+                            <input type="text" id="certNumber" placeholder="مثال: 69-4536-ST" required>
+                        </div>
+                        <div class="form-group">
+                            <label>الاسم الكامل *</label>
+                            <input type="text" id="fullName" placeholder="الاسم الكامل" required>
+                        </div>
+                        <div class="form-group">
+                            <label>الشركة / صاحب العمل *</label>
+                            <input type="text" id="company" placeholder="اسم الشركة" required>
+                        </div>
+                        <div class="form-group">
+                            <label>الدورة / التقييم *</label>
+                            <input type="text" id="course" placeholder="مثال: Wheel Loader Operator" required>
+                        </div>
+                        <div class="form-group">
+                            <label>تاريخ الإصدار *</label>
+                            <input type="date" id="issueDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>تاريخ الانتهاء *</label>
+                            <input type="date" id="dueDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>اسم المدرب</label>
+                            <input type="text" id="trainer" placeholder="اسم المدرب">
+                        </div>
+                        <div class="form-group">
+                            <label>نوع الشهادة</label>
+                            <select id="certType">
+                                <option value="Training">شهادة تدريب</option>
+                                <option value="Completion">شهادة إتمام</option>
+                                <option value="Competency">شهادة كفاءة</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>المراجع القانونية / OSHA</label>
+                            <textarea id="legalRef" placeholder="أدخل المراجع القانونية...">Occupational Safety and Health Administration (OSHA) 29 CFR 1926.1427 Operator training, certification, and evaluation.
+Occupational Safety and Health Administration (OSHA) 29 CFR 1926.651 Specific Excavation Requirements.
+Occupational Safety and Health Administration (OSHA) 29 CFR 1926.602 Material handling equipment.
+EXC-001 Rev 01</textarea>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>صورة المستفيد</label>
+                            <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+                                <input type="file" id="photoInput" accept="image/*" onchange="previewPhoto(this)">
+                                <div id="photoPreview">
+                                    <i style="font-size: 3rem; color: #ccc;">📷</i>
+                                    <p style="color: #888; margin-top: 0.5rem;">اضغط لرفع الصورة</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" onclick="generateCertificate()">👁️ معاينة الشهادة</button>
+                        <button type="button" class="btn btn-success" onclick="saveAndDownload()">💾 حفظ وتنزيل PDF</button>
+                        <button type="button" class="btn btn-secondary" onclick="bulkIssue()">📊 إصدار مجمع (CSV)</button>
+                        <button type="reset" class="btn btn-danger">🔄 مسح النموذج</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="preview-section" id="previewSection" style="display: none;">
+                <h2>📄 معاينة الشهادة</h2>
+                <div id="certificatePreview"></div>
+                <div class="btn-group no-print">
+                    <button class="btn btn-primary" onclick="downloadPDF()">📥 تنزيل PDF</button>
+                    <button class="btn btn-secondary" onclick="printCertificate()">🖨️ طباعة</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificates List -->
+        <div id="certificates" class="page-section">
+            <div class="form-section">
+                <h2>📋 جميع الشهادات</h2>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <input type="text" id="searchCerts" placeholder="البحث بالاسم، الرقم، أو الدورة..." style="flex: 1; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px;" onkeyup="searchCertificates()">
+                    <button class="btn btn-primary" onclick="exportCSV()">📥 تصدير CSV</button>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="certificates-table">
+                        <thead>
+                            <tr>
+                                <th>رقم الشهادة</th>
+                                <th>الاسم</th>
+                                <th>الدورة</th>
+                                <th>تاريخ الإصدار</th>
+                                <th>تاريخ الانتهاء</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="certTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verify -->
+        <div id="verify" class="page-section">
+            <div class="verify-container">
+                <div class="verify-box">
+                    <div class="verify-icon">🔍</div>
+                    <h2>التحقق من الشهادة</h2>
+                    <p>أدخل رقم الشهادة للتحقق من صحتها</p>
+                    <div class="verify-input-group">
+                        <input type="text" id="verifyInput" placeholder="69-4536-ST" maxlength="20">
+                        <button class="btn btn-primary" onclick="verifyCertificate()">تحقق</button>
+                    </div>
+                    <div class="spinner" id="verifySpinner"></div>
+                    <div id="verifyResult" class="verify-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        let certificates = JSON.parse(localStorage.getItem('certificates')) || [];
+        let currentPhoto = null;
+
+        const sampleData = {
+            certNumber: "69-4536-ST",
+            fullName: "HOSSAM MOHAMMED MAHDI",
+            company: "NASSEM AL-ERJEWAN",
+            course: "Wheel Loader Operator",
+            issueDate: "2025-11-15",
+            dueDate: "2026-11-14",
+            trainer: "Mohammed Mustafa",
+            certType: "Training",
+            legalRef: `Occupational Safety and Health Administration (OSHA) 29 CFR 1926.1427 Operator training, certification, and evaluation.
+Occupational Safety and Health Administration (OSHA) 29 CFR 1926.651 Specific Excavation Requirements.
+Occupational Safety and Health Administration (OSHA) 29 CFR 1926.602 Material handling equipment.
+EXC-001 Rev 01`
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+            renderCertificates();
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('issueDate').value = today;
+            const nextYear = new Date();
+            nextYear.setFullYear(nextYear.getFullYear() + 1);
+            document.getElementById('dueDate').value = nextYear.toISOString().split('T')[0];
+            if (certificates.length === 0) loadSampleData();
+        });
+
+        function loadSampleData() {
+            document.getElementById('certNumber').value = sampleData.certNumber;
+            document.getElementById('fullName').value = sampleData.fullName;
+            document.getElementById('company').value = sampleData.company;
+            document.getElementById('course').value = sampleData.course;
+            document.getElementById('issueDate').value = sampleData.issueDate;
+            document.getElementById('dueDate').value = sampleData.dueDate;
+            document.getElementById('trainer').value = sampleData.trainer;
+            document.getElementById('certType').value = sampleData.certType;
+            document.getElementById('legalRef').value = sampleData.legalRef;
+            showToast('تم تحميل بيانات PDF بنجاح!', 'success');
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+            if (pageId === 'certificates') renderCertificates();
+            if (pageId === 'dashboard') updateStats();
+        }
+
+        function previewPhoto(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentPhoto = e.target.result;
+                    document.getElementById('photoPreview').innerHTML = `<img src="${e.target.result}" style="max-width: 150px; max-height: 150px; border-radius: 8px;">`;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function generateCertificate() {
+            const certNumber = document.getElementById('certNumber').value;
+            const fullName = document.getElementById('fullName').value;
+            const company = document.getElementById('company').value;
+            const course = document.getElementById('course').value;
+            const issueDate = document.getElementById('issueDate').value;
+            const dueDate = document.getElementById('dueDate').value;
+            const trainer = document.getElementById('trainer').value;
+            const certType = document.getElementById('certType').value;
+            const legalRef = document.getElementById('legalRef').value;
+
+            if (!certNumber || !fullName || !company || !course || !issueDate || !dueDate) {
+                showToast('يرجى ملء جميع الحقول المطلوبة!', 'error');
+                return;
+            }
+
+            const formattedIssueDate = new Date(issueDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            const formattedDueDate = new Date(dueDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+            const photoHtml = currentPhoto ?
+                `<img src="${currentPhoto}" alt="Photo">` :
+                `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #e0e0e0; color: #999; font-size: 0.7rem;">No Photo</div>`;
+
+            const certHtml = `
+                <div class="certificate-container" id="certDownload">
+                    <div class="cert-border-frame"></div>
+                    <div class="certificate-inner">
+                        <div class="cert-watermark">SCOPE</div>
+                        <div class="cert-number-display">Cert. No: ${certNumber}</div>
+                        <div class="cert-header">
+                            <div class="cert-logo-area">
+                                <div class="cert-logo-icon">🔥</div>
+                                <div class="cert-logo-text">
+                                    <h2>SCOPE</h2>
+                                    <p>Petroleum Services</p>
+                                </div>
+                            </div>
+                            <div class="cert-photo">${photoHtml}</div>
+                        </div>
+                        <div class="cert-title">
+                            <h1>Certificate of ${certType}</h1>
+                        </div>
+                        <div class="cert-content">
+                            <p>This Certifies that</p>
+                            <p class="name">${fullName.toUpperCase()}</p>
+                            <p>Whilst in the Employment of <span class="highlight">${company}</span></p>
+                            <p>Has successfully completed the Assessment course for</p>
+                            <p class="highlight">${course}</p>
+                            <p>And is awarded this Certificate By</p>
+                            <p class="highlight" style="font-size: 1.3rem;">SCOPE PETROLEUM SERVICES</p>
+                        </div>
+                        <div class="cert-details">
+                            <div class="cert-detail-item">
+                                <div class="label">Certificate No.</div>
+                                <div class="value">${certNumber}</div>
+                            </div>
+                            <div class="cert-detail-item">
+                                <div class="label">Issue Date</div>
+                                <div class="value">${formattedIssueDate}</div>
+                            </div>
+                            <div class="cert-detail-item">
+                                <div class="label">Due Date</div>
+                                <div class="value">${formattedDueDate}</div>
+                            </div>
+                            <div class="cert-detail-item">
+                                <div class="label">Trainer</div>
+                                <div class="value">${trainer || 'N/A'}</div>
+                            </div>
+                        </div>
+                        <div class="cert-footer">
+                            <div class="cert-signature">
+                                <div class="sig-line"></div>
+                                <p>Authorized Signature</p>
+                            </div>
+                            <div class="cert-stamp">
+                                <i>🔥</i>
+                                <span>SCOPE</span>
+                                <span>Training Dept.</span>
+                            </div>
+                            <div class="cert-qr">
+                                <div id="certQrcode"></div>
+                                <p>Scan to Verify</p>
+                            </div>
+                        </div>
+                        <div class="cert-legal">
+                            <strong>This certificate is issued in accordance with:</strong><br>
+                            ${legalRef.replace(/\n/g, '<br>')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('certificatePreview').innerHTML = certHtml;
+            document.getElementById('previewSection').style.display = 'block';
+
+            setTimeout(() => {
+                const qrContainer = document.getElementById('certQrcode');
+                if (qrContainer) {
+                    qrContainer.innerHTML = '';
+                    new QRCode(qrContainer, {
+                        text: `https://scopeps.com/qr/?cert=${certNumber}`,
+                        width: 80,
+                        height: 80,
+                        colorDark: '#2E5C8A',
+                        colorLight: '#FDFCF7'
+                    });
+                }
+            }, 100);
+
+            showToast('تم إنشاء معاينة الشهادة!', 'success');
+        }
+
+        function saveAndDownload() {
+            const certData = {
+                id: Date.now(),
+                certNumber: document.getElementById('certNumber').value,
+                fullName: document.getElementById('fullName').value,
+                company: document.getElementById('company').value,
+                course: document.getElementById('course').value,
+                issueDate: document.getElementById('issueDate').value,
+                dueDate: document.getElementById('dueDate').value,
+                trainer: document.getElementById('trainer').value,
+                certType: document.getElementById('certType').value,
+                legalRef: document.getElementById('legalRef').value,
+                photo: currentPhoto,
+                createdAt: new Date().toISOString()
+            };
+
+            if (!certData.certNumber || !certData.fullName) {
+                showToast('يرجى ملء الحقول المطلوبة أولاً!', 'error');
+                return;
+            }
+
+            const existing = certificates.find(c => c.certNumber === certData.certNumber);
+            if (existing) {
+                if (!confirm('رقم الشهادة موجود بالفعل! هل تريد تحديثه؟')) return;
+                certificates = certificates.filter(c => c.certNumber !== certData.certNumber);
+            }
+
+            certificates.push(certData);
+            localStorage.setItem('certificates', JSON.stringify(certificates));
+
+            downloadPDF();
+            updateStats();
+            showToast('تم حفظ الشهادة وتنزيلها!', 'success');
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById('certDownload');
+            if (!element) {
+                showToast('قم بإنشاء المعاينة أولاً!', 'error');
+                return;
+            }
+
+            const certNum = document.getElementById('certNumber').value || 'certificate';
+
+            const opt = {
+                margin: [5, 5, 5, 5],
+                filename: `SCOPE-Certificate-${certNum}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, logging: false, letterRendering: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape', compress: true }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+
+        function printCertificate() {
+            window.print();
+        }
+
+        function updateStats() {
+            const now = new Date();
+            const active = certificates.filter(c => new Date(c.dueDate) > now);
+            const expiring = certificates.filter(c => {
+                const due = new Date(c.dueDate);
+                const diff = (due - now) / (1000 * 60 * 60 * 24);
+                return diff > 0 && diff <= 30;
+            });
+
+            document.getElementById('totalCerts').textContent = certificates.length;
+            document.getElementById('activeCerts').textContent = active.length;
+            document.getElementById('expiringSoon').textContent = expiring.length;
+            document.getElementById('verifiedCount').textContent = localStorage.getItem('verifiedCount') || 0;
+        }
+
+        function renderCertificates() {
+            const tbody = document.getElementById('certTableBody');
+            const now = new Date();
+
+            if (certificates.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem; color: #888;">لم يتم إصدار شهادات بعد</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = certificates.map(cert => {
+                const isExpired = new Date(cert.dueDate) < now;
+                const statusClass = isExpired ? 'status-expired' : 'status-active';
+                const statusText = isExpired ? 'منتهية' : 'نشطة';
+
+                return `
+                    <tr>
+                        <td><strong>${cert.certNumber}</strong></td>
+                        <td>${cert.fullName}</td>
+                        <td>${cert.course}</td>
+                        <td>${new Date(cert.issueDate).toLocaleDateString('en-GB')}</td>
+                        <td>${new Date(cert.dueDate).toLocaleDateString('en-GB')}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td class="actions">
+                            <button class="btn btn-secondary btn-small" onclick="viewCert(${cert.id})">عرض</button>
+                            <button class="btn btn-primary btn-small" onclick="downloadCert(${cert.id})">PDF</button>
+                            <button class="btn btn-danger btn-small" onclick="deleteCert(${cert.id})">حذف</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function viewCert(id) {
+            const cert = certificates.find(c => c.id === id);
+            if (!cert) return;
+
+            document.getElementById('certNumber').value = cert.certNumber;
+            document.getElementById('fullName').value = cert.fullName;
+            document.getElementById('company').value = cert.company;
+            document.getElementById('course').value = cert.course;
+            document.getElementById('issueDate').value = cert.issueDate;
+            document.getElementById('dueDate').value = cert.dueDate;
+            document.getElementById('trainer').value = cert.trainer;
+            document.getElementById('certType').value = cert.certType;
+            document.getElementById('legalRef').value = cert.legalRef;
+
+            if (cert.photo) {
+                currentPhoto = cert.photo;
+                document.getElementById('photoPreview').innerHTML = `<img src="${cert.photo}" style="max-width: 150px; max-height: 150px; border-radius: 8px;">`;
+            }
+
+            showPage('issue');
+            generateCertificate();
+        }
+
+        function downloadCert(id) {
+            const cert = certificates.find(c => c.id === id);
+            if (!cert) return;
+
+            const originalValues = {
+                certNumber: document.getElementById('certNumber').value,
+                fullName: document.getElementById('fullName').value,
+                company: document.getElementById('company').value,
+                course: document.getElementById('course').value,
+                issueDate: document.getElementById('issueDate').value,
+                dueDate: document.getElementById('dueDate').value,
+                trainer: document.getElementById('trainer').value,
+                certType: document.getElementById('certType').value,
+                legalRef: document.getElementById('legalRef').value,
+                photo: currentPhoto
+            };
+
+            document.getElementById('certNumber').value = cert.certNumber;
+            document.getElementById('fullName').value = cert.fullName;
+            document.getElementById('company').value = cert.company;
+            document.getElementById('course').value = cert.course;
+            document.getElementById('issueDate').value = cert.issueDate;
+            document.getElementById('dueDate').value = cert.dueDate;
+            document.getElementById('trainer').value = cert.trainer;
+            document.getElementById('certType').value = cert.certType;
+            document.getElementById('legalRef').value = cert.legalRef;
+            currentPhoto = cert.photo;
+
+            generateCertificate();
+
+            setTimeout(() => {
+                downloadPDF();
+                document.getElementById('certNumber').value = originalValues.certNumber;
+                document.getElementById('fullName').value = originalValues.fullName;
+                document.getElementById('company').value = originalValues.company;
+                document.getElementById('course').value = originalValues.course;
+                document.getElementById('issueDate').value = originalValues.issueDate;
+                document.getElementById('dueDate').value = originalValues.dueDate;
+                document.getElementById('trainer').value = originalValues.trainer;
+                document.getElementById('certType').value = originalValues.certType;
+                document.getElementById('legalRef').value = originalValues.legalRef;
+                currentPhoto = originalValues.photo;
+            }, 500);
+        }
+
+        function deleteCert(id) {
+            if (!confirm('هل أنت متأكد من حذف هذه الشهادة؟')) return;
+            certificates = certificates.filter(c => c.id !== id);
+            localStorage.setItem('certificates', JSON.stringify(certificates));
+            renderCertificates();
+            updateStats();
+            showToast('تم حذف الشهادة!', 'success');
+        }
+
+        function searchCertificates() {
+            const query = document.getElementById('searchCerts').value.toLowerCase();
+            const rows = document.querySelectorAll('#certTableBody tr');
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+
+        function verifyCertificate() {
+            const input = document.getElementById('verifyInput').value.trim().toUpperCase();
+            const result = document.getElementById('verifyResult');
+            const spinner = document.getElementById('verifySpinner');
+
+            if (!input) {
+                showToast('يرجى إدخال رقم الشهادة!', 'error');
+                return;
+            }
+
+            spinner.style.display = 'block';
+            result.className = 'verify-result';
+
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                const cert = certificates.find(c => c.certNumber.toUpperCase() === input);
+
+                if (cert) {
+                    const isExpired = new Date(cert.dueDate) < new Date();
+                    result.className = 'verify-result valid';
+                    result.innerHTML = `
+                        <h3 style="color: #27ae60; margin-bottom: 1rem;">✅ تم التحقق من الشهادة!</h3>
+                        <div style="text-align: right; line-height: 2;">
+                            <p><strong>رقم الشهادة:</strong> ${cert.certNumber}</p>
+                            <p><strong>الاسم:</strong> ${cert.fullName}</p>
+                            <p><strong>الدورة:</strong> ${cert.course}</p>
+                            <p><strong>الشركة:</strong> ${cert.company}</p>
+                            <p><strong>تاريخ الإصدار:</strong> ${new Date(cert.issueDate).toLocaleDateString('en-GB')}</p>
+                            <p><strong>تاريخ الانتهاء:</strong> ${new Date(cert.dueDate).toLocaleDateString('en-GB')}</p>
+                            <p><strong>الحالة:</strong> ${isExpired ? '<span style="color: #e74c3c;">منتهية</span>' : '<span style="color: #27ae60;">نشطة</span>'}</p>
+                        </div>
+                    `;
+                    let count = parseInt(localStorage.getItem('verifiedCount') || 0);
+                    localStorage.setItem('verifiedCount', count + 1);
+                } else {
+                    result.className = 'verify-result invalid';
+                    result.innerHTML = `
+                        <h3 style="color: #e74c3c; margin-bottom: 1rem;">❌ لم يتم العثور على الشهادة</h3>
+                        <p>رقم الشهادة <strong>${input}</strong> غير موجود في سجلاتنا.</p>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;">يرجى التحقق من الرقم والمحاولة مرة أخرى، أو الاتصال بـ SCOPE Petroleum Services للمساعدة.</p>
+                    `;
+                }
+            }, 1000);
+        }
+
+        function bulkIssue() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.csv';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const lines = event.target.result.split('\n');
+                    let count = 0;
+                    for (let i = 1; i < lines.length; i++) {
+                        if (!lines[i].trim()) continue;
+                        const values = lines[i].split(',');
+                        const cert = {
+                            id: Date.now() + i,
+                            certNumber: values[0]?.trim() || `ST-${Date.now()}-${i}`,
+                            fullName: values[1]?.trim() || 'Unknown',
+                            company: values[2]?.trim() || 'N/A',
+                            course: values[3]?.trim() || 'Training',
+                            issueDate: values[4]?.trim() || new Date().toISOString().split('T')[0],
+                            dueDate: values[5]?.trim() || new Date(Date.now() + 31536000000).toISOString().split('T')[0],
+                            trainer: values[6]?.trim() || '',
+                            certType: 'Training',
+                            legalRef: document.getElementById('legalRef').value,
+                            photo: null,
+                            createdAt: new Date().toISOString()
+                        };
+                        if (!certificates.find(c => c.certNumber === cert.certNumber)) {
+                            certificates.push(cert);
+                            count++;
+                        }
+                    }
+                    localStorage.setItem('certificates', JSON.stringify(certificates));
+                    updateStats();
+                    showToast(`تم استيراد ${count} شهادة بنجاح!`, 'success');
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        function exportCSV() {
+            if (certificates.length === 0) {
+                showToast('لا توجد شهادات للتصدير!', 'error');
+                return;
+            }
+
+            const headers = ['Certificate Number,Full Name,Company,Course,Issue Date,Due Date,Trainer,Status'];
+            const rows = certificates.map(c => {
+                const status = new Date(c.dueDate) > new Date() ? 'Active' : 'Expired';
+                return `${c.certNumber},${c.fullName},${c.company},${c.course},${c.issueDate},${c.dueDate},${c.trainer},${status}`;
+            });
+
+            const csv = [...headers, ...rows].join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `SCOPE-Certificates-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('تم تصدير الشهادات!', 'success');
+        }
+
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+    </script>
+</body>
+</html>
