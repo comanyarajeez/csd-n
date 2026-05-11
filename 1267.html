@@ -1,0 +1,653 @@
+<!-- احفظه باسم index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SCOPE Certificate System</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial;
+background:#f2f2f2;
+padding:30px;
+}
+
+.form-box{
+background:#fff;
+padding:25px;
+border-radius:12px;
+max-width:700px;
+margin:auto;
+margin-bottom:30px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.form-box h2{
+margin-bottom:20px;
+color:#0f4c81;
+}
+
+.form-group{
+margin-bottom:15px;
+}
+
+.form-group label{
+display:block;
+margin-bottom:6px;
+font-weight:bold;
+}
+
+.form-group input{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:8px;
+background:#0f4c81;
+color:#fff;
+font-size:17px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+opacity:.9;
+}
+
+#certificate{
+width:1400px;
+height:990px;
+background:#fdfcf7;
+margin:auto;
+border:14px solid #d48a34;
+position:relative;
+overflow:hidden;
+display:none;
+}
+
+.inner{
+padding:60px;
+height:100%;
+position:relative;
+}
+
+.watermark{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:180px;
+color:rgba(0,0,0,.03);
+font-weight:bold;
+letter-spacing:20px;
+}
+
+.corner{
+position:absolute;
+width:90px;
+height:90px;
+border:4px solid #d48a34;
+}
+
+.tl{
+top:20px;
+left:20px;
+border-right:none;
+border-bottom:none;
+}
+
+.tr{
+top:20px;
+right:20px;
+border-left:none;
+border-bottom:none;
+}
+
+.bl{
+bottom:20px;
+left:20px;
+border-right:none;
+border-top:none;
+}
+
+.br{
+bottom:20px;
+right:20px;
+border-left:none;
+border-top:none;
+}
+
+.logo{
+text-align:center;
+}
+
+.logo h1{
+font-size:45px;
+letter-spacing:5px;
+color:#0f4c81;
+}
+
+.logo p{
+font-size:13px;
+letter-spacing:4px;
+}
+
+.photo{
+position:absolute;
+top:60px;
+right:60px;
+width:150px;
+height:180px;
+border:3px solid #0f4c81;
+overflow:hidden;
+background:#eee;
+}
+
+.photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.title{
+text-align:center;
+margin-top:30px;
+font-size:55px;
+font-weight:bold;
+color:#0f4c81;
+}
+
+.subtitle{
+text-align:center;
+margin-top:30px;
+font-size:28px;
+}
+
+.name{
+text-align:center;
+margin-top:25px;
+font-size:50px;
+font-weight:bold;
+color:#0f4c81;
+text-transform:uppercase;
+}
+
+.company{
+text-align:center;
+margin-top:25px;
+font-size:30px;
+}
+
+.course{
+text-align:center;
+margin-top:35px;
+font-size:42px;
+font-weight:bold;
+color:#0f4c81;
+}
+
+.by{
+text-align:center;
+margin-top:40px;
+font-size:24px;
+}
+
+.scope{
+text-align:center;
+margin-top:10px;
+font-size:36px;
+font-weight:bold;
+color:#0f4c81;
+}
+
+.details{
+display:flex;
+justify-content:space-between;
+margin-top:60px;
+padding:0 30px;
+font-size:22px;
+}
+
+.legal{
+position:absolute;
+bottom:150px;
+left:60px;
+right:60px;
+font-size:15px;
+line-height:1.8;
+}
+
+.footer{
+position:absolute;
+bottom:40px;
+left:60px;
+right:60px;
+display:flex;
+justify-content:space-between;
+align-items:end;
+}
+
+.verify-page{
+display:none;
+background:#fff;
+padding:30px;
+max-width:700px;
+margin:30px auto;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.verify-page h2{
+margin-bottom:20px;
+}
+
+.verify-page input{
+width:100%;
+padding:14px;
+border:1px solid #ccc;
+border-radius:8px;
+margin-bottom:15px;
+}
+
+.success{
+color:green;
+font-size:28px;
+font-weight:bold;
+}
+
+.error{
+color:red;
+font-size:28px;
+font-weight:bold;
+}
+
+.result{
+margin-top:20px;
+line-height:2;
+font-size:20px;
+}
+
+.result img{
+width:160px;
+height:190px;
+object-fit:cover;
+border:2px solid #0f4c81;
+margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="form-box">
+
+<h2>SCOPE Certificate System</h2>
+
+<div class="form-group">
+<label>Certificate Number</label>
+<input type="text" id="certNumber">
+</div>
+
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" id="fullName">
+</div>
+
+<div class="form-group">
+<label>Company</label>
+<input type="text" id="company">
+</div>
+
+<div class="form-group">
+<label>Course</label>
+<input type="text" id="course">
+</div>
+
+<div class="form-group">
+<label>Issue Date</label>
+<input type="date" id="issueDate">
+</div>
+
+<div class="form-group">
+<label>Due Date</label>
+<input type="date" id="dueDate">
+</div>
+
+<div class="form-group">
+<label>Trainer</label>
+<input type="text" id="trainer">
+</div>
+
+<div class="form-group">
+<label>Photo</label>
+<input type="file" id="photo">
+</div>
+
+<button onclick="generateCertificate()">
+Generate Certificate
+</button>
+
+<button onclick="downloadPDF()">
+Download PDF
+</button>
+
+</div>
+
+<div id="certificate">
+
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+
+<div class="watermark">
+SCOPE
+</div>
+
+<div class="inner">
+
+<div class="photo">
+<img id="showPhoto">
+</div>
+
+<div class="logo">
+<h1>SCOPE</h1>
+<p>PETROLEUM SERVICES</p>
+</div>
+
+<div class="title">
+Certificate of Training
+</div>
+
+<div class="subtitle">
+This Certifies that
+</div>
+
+<div class="name" id="showName"></div>
+
+<div class="company">
+Whilst in the Employment of
+<br>
+<b id="showCompany"></b>
+</div>
+
+<div class="subtitle" style="margin-top:35px;">
+Has successfully completed the Assessment course for
+</div>
+
+<div class="course" id="showCourse"></div>
+
+<div class="by">
+And is awarded this Certificate By
+</div>
+
+<div class="scope">
+SCOPE PETROLEUM SERVICES
+</div>
+
+<div class="details">
+
+<div>
+<b>Issue Date</b><br>
+<span id="showIssue"></span>
+</div>
+
+<div>
+<b>Due Date</b><br>
+<span id="showDue"></span>
+</div>
+
+<div>
+<b>Certificate No.</b><br>
+<span id="showCert"></span>
+</div>
+
+<div>
+<b>Trainer</b><br>
+<span id="showTrainer"></span>
+</div>
+
+</div>
+
+<div class="legal">
+
+<b>This certificate is issued in accordance with:</b><br>
+
+Occupational Safety and Health Administration (OSHA) 29 CFR 1926.1427 Operator training, certification, and evaluation.<br>
+
+Occupational Safety and Health Administration (OSHA) 29 CFR 1926.651 Specific Excavation Requirements.<br>
+
+Occupational Safety and Health Administration (OSHA) 29 CFR 1926.602 Material handling equipment.
+
+</div>
+
+<div class="footer">
+
+<div>
+_____________________<br>
+Authorized Signature
+</div>
+
+<div>
+<div id="qrcode"></div>
+<center>Scan To Verify</center>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="verify-page" id="verifyPage">
+
+<h2>Verify Certificate</h2>
+
+<input type="text" id="verifyInput" placeholder="Certificate Number">
+
+<button onclick="verifyCertificate()">
+Verify
+</button>
+
+<div id="verifyResult"></div>
+
+</div>
+
+<script>
+
+let photoData="";
+
+document.getElementById("photo").addEventListener("change",function(e){
+
+const file=e.target.files[0];
+
+const reader=new FileReader();
+
+reader.onload=function(){
+
+photoData=reader.result;
+
+document.getElementById("showPhoto").src=photoData;
+
+}
+
+reader.readAsDataURL(file);
+
+});
+
+function generateCertificate(){
+
+const cert=document.getElementById("certNumber").value;
+
+document.getElementById("certificate").style.display="block";
+
+document.getElementById("showName").innerText=
+document.getElementById("fullName").value;
+
+document.getElementById("showCompany").innerText=
+document.getElementById("company").value;
+
+document.getElementById("showCourse").innerText=
+document.getElementById("course").value;
+
+document.getElementById("showIssue").innerText=
+document.getElementById("issueDate").value;
+
+document.getElementById("showDue").innerText=
+document.getElementById("dueDate").value;
+
+document.getElementById("showCert").innerText=cert;
+
+document.getElementById("showTrainer").innerText=
+document.getElementById("trainer").value;
+
+document.getElementById("qrcode").innerHTML="";
+
+new QRCode(document.getElementById("qrcode"),{
+text:window.location.href + "?verify=" + cert,
+width:100,
+height:100
+});
+
+saveCertificate(cert);
+
+}
+
+function saveCertificate(cert){
+
+let certificates=
+JSON.parse(localStorage.getItem("certificates")) || [];
+
+const data={
+
+certNumber:cert,
+name:document.getElementById("fullName").value,
+company:document.getElementById("company").value,
+course:document.getElementById("course").value,
+issueDate:document.getElementById("issueDate").value,
+dueDate:document.getElementById("dueDate").value,
+trainer:document.getElementById("trainer").value,
+photo:photoData
+
+};
+
+const exists=
+certificates.find(x=>x.certNumber===cert);
+
+if(!exists){
+
+certificates.push(data);
+
+localStorage.setItem(
+"certificates",
+JSON.stringify(certificates)
+);
+
+}
+
+}
+
+function downloadPDF(){
+
+const element=document.getElementById("certificate");
+
+html2pdf().from(element).save();
+
+}
+
+function verifyCertificate(){
+
+const cert=
+document.getElementById("verifyInput").value;
+
+const data=
+JSON.parse(localStorage.getItem("certificates")) || [];
+
+const found=
+data.find(x=>x.certNumber===cert);
+
+if(found){
+
+document.getElementById("verifyResult").innerHTML=`
+
+<div class="success">
+Certificate Verified
+</div>
+
+<div class="result">
+
+<b>Name:</b> ${found.name}<br>
+
+<b>Company:</b> ${found.company}<br>
+
+<b>Course:</b> ${found.course}<br>
+
+<b>Issue Date:</b> ${found.issueDate}<br>
+
+<b>Due Date:</b> ${found.dueDate}<br>
+
+<b>Trainer:</b> ${found.trainer}<br>
+
+<img src="${found.photo}">
+
+</div>
+
+`;
+
+}else{
+
+document.getElementById("verifyResult").innerHTML=`
+
+<div class="error">
+Certificate Not Found
+</div>
+
+`;
+
+}
+
+}
+
+const params=
+new URLSearchParams(window.location.search);
+
+const verify=
+params.get("verify");
+
+if(verify){
+
+document.querySelector(".form-box").style.display="none";
+
+document.getElementById("verifyPage").style.display="block";
+
+document.getElementById("verifyInput").value=verify;
+
+verifyCertificate();
+
+}
+
+</script>
+
+</body>
+</html>
