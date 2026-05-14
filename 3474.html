@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basrah Gas Company – Vehicle Verification</title>
+<link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f2f2f2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── LOGIN PAGE ── */
+  #login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #fff;
+    padding: 24px;
+  }
+
+  .login-box {
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .logo-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .bgc-logo-svg {
+    width: 140px;
+    height: auto;
+  }
+
+  .login-box h1 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #1b1b1b;
+    margin-bottom: 20px;
+  }
+
+  .input-group {
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #666;
+    font-size: 15px;
+    color: #1b1b1b;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .input-group input:focus {
+    border-bottom: 2px solid #0067b8;
+  }
+
+  .input-group input::placeholder { color: #aaa; }
+
+  .forgot-link {
+    display: block;
+    color: #0067b8;
+    font-size: 13px;
+    margin: 14px 0 32px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .forgot-link:hover { text-decoration: underline; }
+
+  .btn-next {
+    float: right;
+    background: #0067b8;
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.3px;
+    transition: background 0.15s;
+  }
+  .btn-next:hover { background: #005499; }
+
+  .divider { clear: both; border-top: 1px solid #e0e0e0; margin: 52px 0 0; }
+
+  .signin-options {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 0;
+    cursor: pointer;
+    color: #1b1b1b;
+    font-size: 14px;
+    border-top: 1px solid #ddd;
+    margin-top: 0;
+  }
+  .signin-options svg { opacity: 0.6; }
+
+  .error-msg {
+    color: #d13438;
+    font-size: 13px;
+    margin-top: 6px;
+    display: none;
+  }
+
+  .footer-links {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    padding: 16px 24px;
+    font-size: 12px;
+    color: #555;
+    background: #fff;
+    border-top: 1px solid #eee;
+  }
+  .footer-links a { color: #555; text-decoration: none; }
+  .footer-links a:hover { text-decoration: underline; }
+
+  /* ── INFO PAGE ── */
+  #info-page {
+    display: none;
+    min-height: 100vh;
+    background: #f3f3f3;
+    flex-direction: column;
+  }
+
+  .topbar {
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .topbar .user-info {
+    font-size: 13px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .topbar .user-info span {
+    background: #0067b8;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .signout-btn {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 5px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #333;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .signout-btn:hover { background: #f0f0f0; }
+
+  .content {
+    max-width: 680px;
+    margin: 40px auto;
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  .page-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1b1b1b;
+    margin-bottom: 6px;
+  }
+
+  .page-sub {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 28px;
+  }
+
+  /* Card */
+  .card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 28px;
+    margin-bottom: 16px;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1b1b1b;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .badge-valid {
+    background: #dff6dd;
+    color: #107c10;
+  }
+
+  .badge-expired {
+    background: #fde7e9;
+    color: #d13438;
+  }
+
+  .badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 30px;
+  }
+
+  .info-item label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 4px;
+  }
+
+  .info-item .value {
+    font-size: 15px;
+    color: #1b1b1b;
+    font-weight: 500;
+  }
+
+  .not-found {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 40px 28px;
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+  }
+
+  .not-found svg { margin-bottom: 12px; opacity: 0.4; }
+
+  @media (max-width: 480px) {
+    .info-grid { grid-template-columns: 1fr; }
+    .content { margin: 24px auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ LOGIN PAGE ═══════════════ -->
+<div id="login-page">
+  <div class="login-box">
+
+    <div class="logo-top">
+      <svg class="bgc-logo-svg" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <path d="M30 42 C26 35, 22 28, 28 20 C29 26, 33 30, 30 42Z" fill="#1a7fc1"/>
+          <path d="M40 46 C34 36, 30 22, 40 8 C40 8, 50 22, 46 36 Z" fill="#1a7fc1"/>
+          <path d="M52 42 C56 32, 60 24, 54 16 C52 24, 48 32, 52 42Z" fill="#3aaee0"/>
+          <ellipse cx="41" cy="47" rx="14" ry="4" fill="#1a7fc1" opacity="0.3"/>
+        </g>
+        <text x="72" y="30" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#1a7fc1">Basrah Gas Company</text>
+        <text x="72" y="47" font-family="Arial, sans-serif" font-size="9" fill="#555" direction="rtl" unicode-bidi="bidi-override">شركة غاز البصرة</text>
+      </svg>
+    </div>
+
+    <h1>Sign in</h1>
+
+    <div class="input-group">
+      <input type="email" id="email-input" placeholder="Email, phone, or Skype" autocomplete="off"
+             onkeydown="if(event.key==='Enter') doLogin()"/>
+    </div>
+    <div class="error-msg" id="error-msg">Please enter a valid email address.</div>
+
+    <a class="forgot-link" href="#">Can't access your account?</a>
+
+    <button class="btn-next" onclick="doLogin()">Next</button>
+
+    <div style="clear:both; margin-top: 64px;"></div>
+    <div class="signin-options">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+      </svg>
+      Sign-in options
+    </div>
+  </div>
+
+  <div class="footer-links">
+    <a href="#">Terms of use</a>
+    <a href="#">Privacy &amp; cookies</a>
+    <span>···</span>
+  </div>
+</div>
+
+<!-- ═══════════════ INFO PAGE ═══════════════ -->
+<div id="info-page">
+  <div class="topbar">
+    <svg class="bgc-logo-svg" style="width:120px" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <path d="M30 42 C26 35, 22 28, 28 20 C29 26, 33 30, 30 42Z" fill="#1a7fc1"/>
+        <path d="M40 46 C34 36, 30 22, 40 8 C40 8, 50 22, 46 36 Z" fill="#1a7fc1"/>
+        <path d="M52 42 C56 32, 60 24, 54 16 C52 24, 48 32, 52 42Z" fill="#3aaee0"/>
+        <ellipse cx="41" cy="47" rx="14" ry="4" fill="#1a7fc1" opacity="0.3"/>
+      </g>
+      <text x="72" y="30" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#1a7fc1">Basrah Gas Company</text>
+      <text x="72" y="47" font-family="Arial, sans-serif" font-size="9" fill="#555" direction="rtl" unicode-bidi="bidi-override">شركة غاز البصرة</text>
+    </svg>
+
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div class="user-info">
+        <span id="user-avatar">U</span>
+        <span id="user-email-display"></span>
+      </div>
+      <button class="signout-btn" onclick="doSignOut()">Sign out</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="page-title">Vehicle Inspection Certificate</div>
+    <div class="page-sub" id="cert-sub">Inspection certificate details</div>
+
+    <!-- Result card -->
+    <div class="card" id="result-card">
+      <div class="card-header">
+        <div class="card-title" id="card-title">Vehicle Details</div>
+        <span class="badge badge-valid" id="status-badge">
+          <span class="badge-dot"></span>
+          <span id="status-text">Valid</span>
+        </span>
+      </div>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Serial Number</label>
+          <div class="value" id="f-sn">—</div>
+        </div>
+        <div class="info-item">
+          <label>Inspection Period</label>
+          <div class="value" id="f-period">—</div>
+        </div>
+        <div class="info-item">
+          <label>Vehicle Type</label>
+          <div class="value" id="f-type">—</div>
+        </div>
+        <div class="info-item">
+          <label>Plate Number</label>
+          <div class="value" id="f-plate">—</div>
+        </div>
+        <div class="info-item">
+          <label>Driver</label>
+          <div class="value" id="f-driver">—</div>
+        </div>
+        <div class="info-item">
+          <label>Department</label>
+          <div class="value" id="f-dept">—</div>
+        </div>
+        <div class="info-item">
+          <label>Issue Date</label>
+          <div class="value" id="f-issued">—</div>
+        </div>
+        <div class="info-item">
+          <label>Expiry Date</label>
+          <div class="value" id="f-expiry">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Not found -->
+    <div class="not-found" id="not-found" style="display:none;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        <line x1="11" y1="8" x2="11" y2="12"/><circle cx="11" cy="15" r="0.5" fill="#999"/>
+      </svg>
+      <div>No certificate found for this account.</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── Demo vehicle database (keyed by email) ──
+const vehiclesByEmail = {
+  "ahmed@bgc.com": {
+    sn: "SN-3474",
+    period: "Jan – June 2026",
+    type: "Heavy Equipment",
+    plate: "HCM1U100A00221607",
+    driver: "Ali Jabbar Hashim",
+    dept: "Operations",
+    issued: "Jan 1, 2026",
+    expiry: "Jun 30, 2026",
+    valid: true
+  },
+  "hassan@bgc.com": {
+    sn: "SN-1100",
+    period: "Jan – June 2025",
+    type: "Light Vehicle",
+    plate: "BGC-2210",
+    driver: "Hassan Al-Basri",
+    dept: "Logistics",
+    issued: "Jan 1, 2025",
+    expiry: "Jun 30, 2025",
+    valid: false
+  },
+  "kareem@bgc.com": {
+    sn: "SN-2250",
+    period: "Jan – June 2026",
+    type: "Crane",
+    plate: "BGC-9933",
+    driver: "Kareem Nouri",
+    dept: "Maintenance",
+    issued: "Jan 1, 2026",
+    expiry: "Jun 30, 2026",
+    valid: true
+  }
+};
+
+// ── Login ──
+function doLogin() {
+  const email = document.getElementById('email-input').value.trim().toLowerCase();
+  const err   = document.getElementById('error-msg');
+
+  if (!email || !email.includes('@')) {
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+
+  // Set user info in topbar
+  document.getElementById('user-email-display').textContent = email;
+  document.getElementById('user-avatar').textContent = email[0].toUpperCase();
+
+  // Show info page
+  document.getElementById('login-page').style.display = 'none';
+  document.getElementById('info-page').style.display  = 'flex';
+  document.getElementById('info-page').style.flexDirection = 'column';
+
+  // Load certificate directly
+  loadCertificate(email);
+}
+
+// ── Load certificate by email ──
+function loadCertificate(email) {
+  const defaultVehicle = {
+    sn: "SN-3474",
+    period: "Jan – June 2026",
+    type: "Heavy Equipment",
+    plate: "HCM1U100A00221607",
+    driver: "Ali Jabbar Hashim",
+    dept: "Operations",
+    issued: "Jan 1, 2026",
+    expiry: "Jun 30, 2026",
+    valid: true
+  };
+
+  const v = vehiclesByEmail[email] || defaultVehicle;
+
+  document.getElementById('not-found').style.display = 'none';
+
+  // Populate fields
+  document.getElementById('f-sn').textContent     = v.sn;
+  document.getElementById('f-period').textContent = v.period;
+  document.getElementById('f-type').textContent   = v.type;
+  document.getElementById('f-plate').textContent  = v.plate;
+  document.getElementById('f-driver').textContent = v.driver;
+  document.getElementById('f-dept').textContent   = v.dept;
+  document.getElementById('f-issued').textContent = v.issued;
+  document.getElementById('f-expiry').textContent = v.expiry;
+  document.getElementById('card-title').textContent = v.sn + ' — Vehicle Details';
+  document.getElementById('cert-sub').textContent = 'Certificate linked to ' + email;
+
+  const badge    = document.getElementById('status-badge');
+  const statusTx = document.getElementById('status-text');
+  if (v.valid) {
+    badge.className      = 'badge badge-valid';
+    statusTx.textContent = 'Certified – Valid';
+  } else {
+    badge.className      = 'badge badge-expired';
+    statusTx.textContent = 'Expired';
+  }
+
+  document.getElementById('result-card').style.display = 'block';
+}
+
+// ── Sign out ──
+function doSignOut() {
+  document.getElementById('info-page').style.display  = 'none';
+  document.getElementById('login-page').style.display = 'flex';
+  document.getElementById('email-input').value = '';
+  document.getElementById('result-card').style.display = 'block';
+  document.getElementById('not-found').style.display   = 'none';
+}
+</script>
+</body>
+</html>
