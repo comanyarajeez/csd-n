@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="درع البصرة الحصين - المقاولات العامة والمعدات الثقيلة">
+  <title>Basra Shield - درع البصرة الحصين</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    :root {
+      --primary: #1a1a1a;
+      --secondary: #0d0d0d;
+      --accent: #b8862f;
+      --accent-light: #d4a955;
+      --text-light: #ffffff;
+      --text-gray: #d0d0d0;
+      --border: #2a2a2a;
+      --shadow: rgba(0, 0, 0, 0.5);
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--primary);
+      color: var(--text-gray);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      border-bottom: 2px solid var(--accent);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px var(--shadow);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+    }
+
+    .logo img {
+      height: 50px;
+      width: auto;
+      animation: logoFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .logo-text h1 {
+      font-size: 1.4rem;
+      color: var(--text-light);
+      letter-spacing: 1px;
+    }
+
+    .logo-text p {
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-header {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-contact {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      color: var(--primary);
+    }
+
+    .btn-contact:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(184, 134, 47, 0.4);
+    }
+
+    .btn-admin {
+      background: #2a2a2a;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .btn-admin:hover {
+      background: var(--accent);
+      color: var(--primary);
+    }
+
+    /* ===== MAIN SECTIONS ===== */
+    section {
+      padding: 5rem 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+    }
+
+    section h2 .accent { color: var(--accent); }
+
+    /* ===== HERO ===== */
+    .hero {
+      margin-top: 70px;
+      position: relative;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(13, 13, 13, 0.9) 0%, rgba(26, 26, 26, 0.8) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--text-light);
+      animation: slideUp 0.8s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 10px var(--shadow);
+    }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      color: var(--text-gray);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(184, 134, 47, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .gallery-card {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 300px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.9) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-card:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay h3 {
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .gallery-overlay p {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* ===== SERVICES GRID ===== */
+    .services-grid, .pricing-grid, .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--secondary);
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(184, 134, 47, 0.15);
+    }
+
+    .card h3 {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      color: var(--text-gray);
+      font-size: 0.95rem;
+    }
+
+    /* ===== PRICING TABLE ===== */
+    .pricing-card {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      padding: 2rem;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent);
+      position: relative;
+    }
+
+    .pricing-card .price {
+      font-size: 2rem;
+      color: var(--accent);
+      font-weight: bold;
+      margin: 1rem 0;
+    }
+
+    .pricing-card .price span {
+      font-size: 0.8rem;
+      color: var(--text-gray);
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+
+    .pricing-card li {
+      color: var(--text-gray);
+      margin-bottom: 0.8rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .pricing-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ===== BOOKING FORM ===== */
+    .booking-form, .contact-form {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: var(--secondary);
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--primary);
+      border: 1px solid var(--border);
+      color: var(--text-light);
+      padding: 0.8rem;
+      border-radius: 5px;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 10px rgba(184, 134, 47, 0.2);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      color: var(--primary);
+      padding: 1rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(184, 134, 47, 0.4);
+    }
+
+    /* ===== ADMIN DASHBOARD ===== */
+    .admin-panel {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--primary);
+      z-index: 2000;
+      overflow-y: auto;
+      padding-top: 80px;
+    }
+
+    .admin-panel.active {
+      display: block;
+    }
+
+    .admin-header {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      border-bottom: 2px solid var(--accent);
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 2001;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-header h1 {
+      color: var(--text-light);
+      font-size: 1.5rem;
+    }
+
+    .close-admin {
+      background: var(--accent);
+      color: var(--primary);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .admin-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .admin-tab {
+      padding: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-gray);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .admin-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .messages-list, .bookings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .message-item, .booking-item {
+      background: var(--secondary);
+      padding: 1.5rem;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .message-item h3, .booking-item h3 {
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .message-item p, .booking-item p {
+      color: var(--text-gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .message-time {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--secondary);
+      padding: 2rem;
+      border-radius: 10px;
+      border-top: 3px solid var(--accent);
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-size: 2.5rem;
+      color: var(--accent);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .label {
+      color: var(--text-gray);
+      font-size: 1rem;
+    }
+
+    /* ===== MODAL LOGIN ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1500;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--secondary);
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 400px;
+      border: 2px solid var(--accent);
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-content h2 {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--secondary);
+      border-top: 2px solid var(--accent);
+      padding: 2rem 3rem;
+      margin-top: 3rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto 2rem;
+    }
+
+    .footer-section h3 {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .footer-section a {
+      color: var(--text-gray);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--accent);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--accent);
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      text-align: center;
+      color: var(--text-gray);
+    }
+
+    /* ===== FLOATING BUTTONS ===== */
+    .floating-buttons {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 999;
+    }
+
+    .float-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      text-decoration: none;
+      color: white;
+    }
+
+    .whatsapp-btn {
+      background: #25D366;
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    .telegram-btn {
+      background: #0088cc;
+    }
+
+    .telegram-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
+    }
+
+    .call-btn {
+      background: var(--accent);
+    }
+
+    .call-btn:hover {
+      transform: scale(1.1);
+      background: var(--accent-light);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { padding: 0.8rem 1.5rem; }
+      .nav-links { gap: 1rem; }
+      .hero-content h1 { font-size: 2rem; }
+      section { padding: 3rem 1.5rem; }
+      .floating-buttons { bottom: 1rem; right: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <div class="logo" onclick="scrollToHome()">
+        <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #0e2a52, #b8862f); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <span style="color: white; font-weight: bold; font-size: 1.2rem;">BS</span>
+        </div>
+        <div class="logo-text">
+          <h1>BASRA SHIELD</h1>
+          <p>General Contracting</p>
+        </div>
+      </div>
+      
+      <ul class="nav-links">
+        <li><a href="#home" onclick="scrollToSection('home')">الرئيسية</a></li>
+        <li><a href="#gallery" onclick="scrollToSection('gallery')">الأسطول</a></li>
+        <li><a href="#services" onclick="scrollToSection('services')">الخدمات</a></li>
+        <li><a href="#pricing" onclick="scrollToSection('pricing')">الأسعار</a></li>
+        <li><a href="#booking" onclick="scrollToSection('booking')">الحجز</a></li>
+        <li><a href="#reviews" onclick="scrollToSection('reviews')">التقييمات</a></li>
+      </ul>
+      
+      <div class="nav-buttons">
+        <button class="btn-header btn-contact" onclick="scrollToSection('contact')">تواصل معنا</button>
+        <button class="btn-header btn-admin" onclick="openAdminLogin()">🔐 لوحة التحكم</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>خدمات المقاولات العامة و<span class="accent">المعدات الثقيلة</span></h1>
+      <p>توفير أفضل الحلول الهندسية والمعدات الحديثة لقطاع النفط والتشييد بالبصرة والعراق</p>
+      <div class="cta-buttons">
+        <a href="#booking" class="btn btn-primary">احجز الآن</a>
+        <a href="#contact" class="btn btn-secondary">اتصل بنا</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <section id="gallery">
+    <h2>أسطول <span class="accent">المعدات</span></h2>
+    <div class="gallery" id="galleryContainer">
+      <!-- سيتم ملؤه من JavaScript -->
+    </div>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section id="services" style="background: var(--secondary);">
+    <h2>خدمات <span class="accent">الشركة</span></h2>
+    <div class="services-grid">
+      <div class="card">
+        <h3>⛏️ أعمال الحفر</h3>
+        <p>خدمات حفر احترافية عميقة باستخدام أحدث المعدات والتقنيات الحديثة</p>
+      </div>
+      <div class="card">
+        <h3>🏗️ المقاولات العامة</h3>
+        <p>تنفيذ مشاريع البناء والتشييد الكبرى بأعلى مستويات الجودة</p>
+      </div>
+      <div class="card">
+        <h3>🚜 تأجير المعدات</h3>
+        <p>خدمات تأجير شاملة برسوم تنافسية وعقود مرنة</p>
+      </div>
+      <div class="card">
+        <h3>🔧 الصيانة الدورية</h3>
+        <p>برامج صيانة شاملة وخدمات إصلاح فورية</p>
+      </div>
+      <div class="card">
+        <h3>👷 الكوادر المدربة</h3>
+        <p>فريق عمل محترف ومدرب على أعلى المستويات الدولية</p>
+      </div>
+      <div class="card">
+        <h3>📋 الفحوصات والشهادات</h3>
+        <p>برنامج فحص شامل واصدار شهادات الصلاحية</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING SECTION -->
+  <section id="pricing">
+    <h2>عروض <span class="accent">الأسعار</span></h2>
+    <div class="pricing-grid" id="pricingContainer">
+      <!-- سيتم ملؤه من JavaScript -->
+    </div>
+  </section>
+
+  <!-- BOOKING SECTION -->
+  <section id="booking" style="background: var(--secondary);">
+    <h2>احجز <span class="accent">الخدمة</span></h2>
+    <form class="booking-form" onsubmit="submitBooking(event)">
+      <div class="form-group">
+        <label>الاسم الكامل *</label>
+        <input type="text" id="bookingName" required>
+      </div>
+      <div class="form-group">
+        <label>البريد الإلكتروني *</label>
+        <input type="email" id="bookingEmail" required>
+      </div>
+      <div class="form-group">
+        <label>رقم الهاتف *</label>
+        <input type="tel" id="bookingPhone" required>
+      </div>
+      <div class="form-group">
+        <label>نوع الخدمة *</label>
+        <select id="bookingService" required>
+          <option value="">-- اختر الخدمة --</option>
+          <option value="حفر">أعمال الحفر</option>
+          <option value="مقاولات">المقاولات العامة</option>
+          <option value="تأجير">تأجير المعدات</option>
+          <option value="صيانة">الصيانة الدورية</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>تاريخ البداية *</label>
+        <input type="date" id="bookingDate" required>
+      </div>
+      <div class="form-group">
+        <label>ملاحظات إضافية</label>
+        <textarea id="bookingNotes"></textarea>
+      </div>
+      <button type="submit" class="btn-submit">إرسال الحجز</button>
+    </form>
+  </section>
+
+  <!-- REVIEWS SECTION -->
+  <section id="reviews">
+    <h2>آراء <span class="accent">العملاء</span></h2>
+    <div class="reviews-grid" id="reviewsContainer">
+      <!-- سيتم ملؤه من JavaScript -->
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" style="background: var(--secondary);">
+    <h2>تواصل <span class="accent">معنا</span></h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem;">
+      <div>
+        <div style="margin-bottom: 2rem;">
+          <h3 style="color: var(--text-light); margin-bottom: 0.5rem;">📍 العنوان</h3>
+          <p>البصرة - الزبير - الشعيبة - منطقة محطة القطار</p>
+        </div>
+        <div style="margin-bottom: 2rem;">
+          <h3 style="color: var(--text-light); margin-bottom: 0.5rem;">📞 الهاتف</h3>
+          <p>+964 782 323 8403</p>
+          <p>+964 782 169 6931</p>
+          <p>+964 782 650 8884</p>
+        </div>
+        <div style="margin-bottom: 2rem;">
+          <h3 style="color: var(--text-light); margin-bottom: 0.5rem;">📧 البريد الإلكتروني</h3>
+          <p>basrafortifiedshield@gmail.com</p>
+        </div>
+        <div>
+          <h3 style="color: var(--text-light); margin-bottom: 0.5rem;">⏰ ساعات العمل</h3>
+          <p>السبت - الخميس: 8:00 ص - 5:00 م</p>
+          <p>الجمعة والأحد: مغلق</p>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="submitContact(event)" style="margin: 0;">
+        <div class="form-group">
+          <label>الاسم الكامل *</label>
+          <input type="text" id="contactName" required>
+        </div>
+        <div class="form-group">
+          <label>البريد الإلكتروني *</label>
+          <input type="email" id="contactEmail" required>
+        </div>
+        <div class="form-group">
+          <label>الرسالة *</label>
+          <textarea id="contactMessage" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">إرسال الرسالة</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h3>عن الشركة</h3>
+        <p>درع البصرة الحصين - شركة متخصصة في المقاولات العامة والمعدات الثقيلة بخبرة عريقة منذ 2015</p>
+      </div>
+      <div class="footer-section">
+        <h3>الخدمات</h3>
+        <a href="#services">المقاولات العامة</a>
+        <a href="#services">تأجير المعدات</a>
+        <a href="#services">الصيانة الدورية</a>
+        <a href="#services">الفحوصات والشهادات</a>
+      </div>
+      <div class="footer-section">
+        <h3>روابط مهمة</h3>
+        <a href="#gallery">الأسطول</a>
+        <a href="#booking">الحجز</a>
+        <a href="#reviews">التقييمات</a>
+        <a href="#contact">التواصل</a>
+      </div>
+      <div class="footer-section">
+        <h3>تواصل معنا</h3>
+        <p>📞 +964 782 323 8403</p>
+        <p>📧 basrafortifiedshield@gmail.com</p>
+        <div class="social-links">
+          <a href="https://wa.me/964782323840" target="_blank" title="WhatsApp">💬</a>
+          <a href="https://t.me/basrafortifiedshield" target="_blank" title="Telegram">✈️</a>
+          <a href="https://www.facebook.com" target="_blank" title="Facebook">f</a>
+          <a href="https://www.instagram.com" target="_blank" title="Instagram">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Basra Shield General Contracting Co. جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <!-- FLOATING BUTTONS -->
+  <div class="floating-buttons">
+    <a href="https://wa.me/964782323840" target="_blank" class="float-btn whatsapp-btn" title="WhatsApp">💬</a>
+    <a href="https://t.me/basrafortifiedshield" target="_blank" class="float-btn telegram-btn" title="Telegram">✈️</a>
+    <a href="tel:+964782323840" class="float-btn call-btn" title="اتصل">☎️</a>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-header">
+      <h1>🔐 لوحة التحكم - درع البصرة الحصين</h1>
+      <button class="close-admin" onclick="closeAdminPanel()">✕ غلق</button>
+    </div>
+    <div class="admin-content">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number" id="statBookings">0</div>
+          <div class="label">حجوزات جديدة</div>
+        </div>
+        <div class="stat-card">
+          <div class="number" id="statMessages">0</div>
+          <div class="label">رسائل</div>
+        </div>
+        <div class="stat-card">
+          <div class="number" id="statReviews">0</div>
+          <div class="label">تقييمات</div>
+        </div>
+        <div class="stat-card">
+          <div class="number" id="statServices">6</div>
+          <div class="label">خدمات فعالة</div>
+        </div>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab('bookings')">📋 الحجوزات</button>
+        <button class="admin-tab" onclick="switchTab('messages')">💬 الرسائل</button>
+        <button class="admin-tab" onclick="switchTab('reviews')">⭐ التقييمات</button>
+        <button class="admin-tab" onclick="switchTab('settings')">⚙️ الإعدادات</button>
+      </div>
+
+      <div class="tab-content active" id="bookings-tab">
+        <h2>الحجوزات الجديدة</h2>
+        <div class="bookings-list" id="bookingsList">
+          <p style="color: var(--text-gray);">لا توجد حجوزات حتى الآن</p>
+        </div>
+      </div>
+
+      <div class="tab-content" id="messages-tab">
+        <h2>الرسائل الواردة</h2>
+        <div class="messages-list" id="messagesList">
+          <p style="color: var(--text-gray);">لا توجد رسائل حتى الآن</p>
+        </div>
+      </div>
+
+      <div class="tab-content" id="reviews-tab">
+        <h2>التقييمات والآراء</h2>
+        <form style="margin-bottom: 2rem; background: var(--secondary); padding: 1.5rem; border-radius: 10px;">
+          <h3 style="color: var(--text-light); margin-bottom: 1rem;">إضافة تقييم جديد</h3>
+          <div class="form-group">
+            <label>اسم العميل</label>
+            <input type="text" id="reviewerName" placeholder="اسم العميل">
+          </div>
+          <div class="form-group">
+            <label>الشركة/الجهة</label>
+            <input type="text" id="reviewerCompany" placeholder="اسم الشركة">
+          </div>
+          <div class="form-group">
+            <label>التقييم (من 1-5)</label>
+            <select id="reviewRating">
+              <option value="5">⭐⭐⭐⭐⭐ ممتاز</option>
+              <option value="4">⭐⭐⭐⭐ جيد جداً</option>
+              <option value="3">⭐⭐⭐ جيد</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>الرأي</label>
+            <textarea id="reviewText" placeholder="اكتب رأيك"></textarea>
+          </div>
+          <button type="button" class="btn-submit" onclick="addReview()" style="cursor: pointer;">إضافة التقييم</button>
+        </form>
+        <div class="reviews-grid" id="adminReviews">
+          <!-- سيتم ملؤه من JavaScript -->
+        </div>
+      </div>
+
+      <div class="tab-content" id="settings-tab">
+        <h2>إعدادات الموقع</h2>
+        <div style="background: var(--secondary); padding: 2rem; border-radius: 10px;">
+          <div class="form-group">
+            <label>رقم الهاتف الرئيسي</label>
+            <input type="tel" id="settingsPhone" value="+964 782 323 8403">
+          </div>
+          <div class="form-group">
+            <label>البريد الإلكتروني</label>
+            <input type="email" id="settingsEmail" value="basrafortifiedshield@gmail.com">
+          </div>
+          <div class="form-group">
+            <label>عنوان الشركة</label>
+            <textarea id="settingsAddress">البصرة - الزبير - الشعيبة - منطقة محطة القطار</textarea>
+          </div>
+          <button class="btn-submit" onclick="saveSettings()" style="cursor: pointer;">حفظ الإعدادات</button>
+          <button class="btn-submit" onclick="clearAllData()" style="background: #d32f2f; margin-top: 1rem; cursor: pointer;">🗑️ مسح جميع البيانات</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <h2>🔐 تسجيل الدخول</h2>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input type="password" id="adminPassword" placeholder="أدخل كلمة المرور">
+      </div>
+      <button class="btn-submit" onclick="loginAdmin()" style="cursor: pointer;">دخول</button>
+      <button class="btn-submit" onclick="closeAdminLogin()" style="background: #666; margin-top: 0.5rem; cursor: pointer;">إغلاق</button>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = 'admin123'; // كلمة المرور الافتراضية
+
+    // ===== GALLERY & PRICING DATA =====
+    const galleryItems = [
+      { title: 'حفارات Hitachi', desc: 'معدات حفر احترافية' },
+      { title: 'تحميلات SDLG', desc: 'قدرة تحميل عالية' },
+      { title: 'مساويات Caterpillar', desc: 'تسوية دقيقة' },
+      { title: 'شاحنات نقل', desc: 'نقل آمن وموثوق' },
+      { title: 'آليات هيدروليكية', desc: 'أعمال متخصصة' },
+      { title: 'سيارات دعم', desc: 'صيانة وخدمة' }
+    ];
+
+    const pricingOptions = [
+      { title: 'حفارة يومية', price: '250,000', period: 'يومي', features: ['تشغيل 8 ساعات', 'سائق مدرب', 'وقود وصيانة'] },
+      { title: 'تحميل أسبوعي', price: '1,400,000', period: 'أسبوع', features: ['تشغيل مستمر', 'فريق عمل', 'صيانة دورية'] },
+      { title: 'مساو شهري', price: '4,500,000', period: 'شهر', features: ['استخدام غير محدود', 'فنيين متخصصين', 'قطع غيار'] },
+      { title: 'حفريات كبرى', price: 'حسب التقدير', period: 'مخصص', features: ['عرض سعر مخصص', 'فريق متكامل', 'ضمان الجودة'] }
+    ];
+
+    const reviews = [
+      { name: 'المهندس علي', company: 'شركة التطوير النفطي', rating: 5, text: 'خدمات احترافية جداً والمعدات حديثة' },
+      { name: 'م. فاطمة محمد', company: 'إدارة المشاريع الحكومية', rating: 5, text: 'الالتزام بالمواعيد والجودة ممتاز' },
+      { name: 'أ. خالد عبدالله', company: 'شركة الإنشاءات', rating: 5, text: 'أفضل شركة بالبصرة والأسعار معقولة' }
+    ];
+
+    // ===== INITIALIZE =====
+    function initPage() {
+      loadGallery();
+      loadPricing();
+      loadReviews();
+      loadAdminData();
+      loadAdminReviews();
+    }
+
+    function loadGallery() {
+      const container = document.getElementById('galleryContainer');
+      container.innerHTML = galleryItems.map((item, idx) => `
+        <div class="gallery-card">
+          <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #${Math.floor(Math.random()*16777215).toString(16)} 0%, #${Math.floor(Math.random()*16777215).toString(16)} 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            🏗️
+          </div>
+          <div class="gallery-overlay">
+            <h3>${item.title}</h3>
+            <p>${item.desc}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function loadPricing() {
+      const container = document.getElementById('pricingContainer');
+      container.innerHTML = pricingOptions.map(option => `
+        <div class="pricing-card">
+          <h3>${option.title}</h3>
+          <div class="price">${option.price}<span> / ${option.period}</span></div>
+          <ul>
+            ${option.features.map(f => `<li>${f}</li>`).join('')}
+          </ul>
+          <button class="btn-submit" onclick="bookService('${option.title}')" style="cursor: pointer;">احجز الآن</button>
+        </div>
+      `).join('');
+    }
+
+    function loadReviews() {
+      const container = document.getElementById('reviewsContainer');
+      container.innerHTML = reviews.map(review => `
+        <div class="card">
+          <h3>${'⭐'.repeat(review.rating)}</h3>
+          <p>"${review.text}"</p>
+          <div style="margin-top: 1rem;">
+            <strong style="color: var(--accent);">${review.name}</strong>
+            <p style="font-size: 0.9rem; margin-top: 0.3rem;">${review.company}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ===== ADMIN FUNCTIONS =====
+    function openAdminLogin() {
+      document.getElementById('loginModal').classList.add('active');
+    }
+
+    function closeAdminLogin() {
+      document.getElementById('loginModal').classList.remove('active');
+      document.getElementById('adminPassword').value = '';
+    }
+
+    function loginAdmin() {
+      const password = document.getElementById('adminPassword').value;
+      if (password === ADMIN_PASSWORD) {
+        closeAdminLogin();
+        document.getElementById('adminPanel').classList.add('active');
+        loadAdminData();
+      } else {
+        alert('كلمة المرور غير صحيحة!');
+      }
+    }
+
+    function closeAdminPanel() {
+      document.getElementById('adminPanel').classList.remove('active');
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.admin-tab').forEach(el => el.classList.remove('active'));
+      document.getElementById(tab + '-tab').classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function loadAdminData() {
+      const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+      const messages = JSON.parse(localStorage.getItem('messages')) || [];
+      const customReviews = JSON.parse(localStorage.getItem('customReviews')) || [];
+
+      document.getElementById('statBookings').textContent = bookings.length;
+      document.getElementById('statMessages').textContent = messages.length;
+      document.getElementById('statReviews').textContent = customReviews.length + reviews.length;
+
+      const bookingsList = document.getElementById('bookingsList');
+      if (bookings.length > 0) {
+        bookingsList.innerHTML = bookings.map((b, idx) => `
+          <div class="booking-item">
+            <h3>${b.name}</h3>
+            <p><strong>الخدمة:</strong> ${b.service}</p>
+            <p><strong>الهاتف:</strong> ${b.phone}</p>
+            <p><strong>البريد:</strong> ${b.email}</p>
+            <p><strong>التاريخ:</strong> ${b.date}</p>
+            <p>${b.notes}</p>
+            <button style="background: #d32f2f; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem;" onclick="deleteBooking(${idx})">🗑️ حذف</button>
+          </div>
+        `).join('');
+      }
+
+      const messagesList = document.getElementById('messagesList');
+      if (messages.length > 0) {
+        messagesList.innerHTML = messages.map((m, idx) => `
+          <div class="message-item">
+            <h3>${m.name}</h3>
+            <p>${m.message}</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+              <div class="message-time">📧 ${m.email}</div>
+              <button style="background: #d32f2f; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;" onclick="deleteMessage(${idx})">🗑️ حذف</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function loadAdminReviews() {
+      const customReviews = JSON.parse(localStorage.getItem('customReviews')) || [];
+      const allReviews = [...reviews, ...customReviews];
+      const container = document.getElementById('adminReviews');
+      container.innerHTML = allReviews.map((review, idx) => `
+        <div class="card">
+          <h3>${'⭐'.repeat(review.rating)}</h3>
+          <p>"${review.text}"</p>
+          <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong style="color: var(--accent);">${review.name}</strong>
+              <p style="font-size: 0.9rem; margin-top: 0.3rem;">${review.company}</p>
+            </div>
+            ${customReviews[idx - reviews.length] ? `<button style="background: #d32f2f; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;" onclick="deleteReview(${idx - reviews.length})">🗑️</button>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addReview() {
+      const name = document.getElementById('reviewerName').value;
+      const company = document.getElementById('reviewerCompany').value;
+      const rating = parseInt(document.getElementById('reviewRating').value);
+      const text = document.getElementById('reviewText').value;
+
+      if (!name || !company || !text) {
+        alert('يرجى ملء جميع الحقول');
+        return;
+      }
+
+      const customReviews = JSON.parse(localStorage.getItem('customReviews')) || [];
+      customReviews.push({ name, company, rating, text });
+      localStorage.setItem('customReviews', JSON.stringify(customReviews));
+
+      document.getElementById('reviewerName').value = '';
+      document.getElementById('reviewerCompany').value = '';
+      document.getElementById('reviewText').value = '';
+
+      loadAdminReviews();
+      loadReviews();
+      document.getElementById('statReviews').textContent = parseInt(document.getElementById('statReviews').textContent) + 1;
+      alert('تم إضافة التقييم بنجاح');
+    }
+
+    function deleteReview(idx) {
+      if (confirm('هل أنت متأكد من الحذف؟')) {
+        const customReviews = JSON.parse(localStorage.getItem('customReviews')) || [];
+        customReviews.splice(idx, 1);
+        localStorage.setItem('customReviews', JSON.stringify(customReviews));
+        loadAdminReviews();
+        loadReviews();
+      }
+    }
+
+    function deleteBooking(idx) {
+      if (confirm('هل أنت متأكد من الحذف؟')) {
+        const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+        bookings.splice(idx, 1);
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+        loadAdminData();
+      }
+    }
+
+    function deleteMessage(idx) {
+      if (confirm('هل أنت متأكد من الحذف؟')) {
+        const messages = JSON.parse(localStorage.getItem('messages')) || [];
+        messages.splice(idx, 1);
+        localStorage.setItem('messages', JSON.stringify(messages));
+        loadAdminData();
+      }
+    }
+
+    function saveSettings() {
+      const settings = {
+        phone: document.getElementById('settingsPhone').value,
+        email: document.getElementById('settingsEmail').value,
+        address: document.getElementById('settingsAddress').value
+      };
+      localStorage.setItem('siteSettings', JSON.stringify(settings));
+      alert('تم حفظ الإعدادات بنجاح');
+    }
+
+    function clearAllData() {
+      if (confirm('هل أنت متأكد؟ سيتم حذف جميع البيانات!')) {
+        localStorage.clear();
+        loadAdminData();
+        alert('تم مسح جميع البيانات');
+      }
+    }
+
+    // ===== FORMS =====
+    function submitBooking(e) {
+      e.preventDefault();
+      const booking = {
+        name: document.getElementById('bookingName').value,
+        email: document.getElementById('bookingEmail').value,
+        phone: document.getElementById('bookingPhone').value,
+        service: document.getElementById('bookingService').value,
+        date: document.getElementById('bookingDate').value,
+        notes: document.getElementById('bookingNotes').value,
+        time: new Date().toLocaleString('ar-IQ')
+      };
+
+      const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+      bookings.push(booking);
+      localStorage.setItem('bookings', JSON.stringify(bookings));
+
+      alert('شكراً! تم استقبال حجزك. سنتواصل معك قريباً');
+      e.target.reset();
+    }
+
+    function submitContact(e) {
+      e.preventDefault();
+      const message = {
+        name: document.getElementById('contactName').value,
+        email: document.getElementById('contactEmail').value,
+        message: document.getElementById('contactMessage').value,
+        time: new Date().toLocaleString('ar-IQ')
+      };
+
+      const messages = JSON.parse(localStorage.getItem('messages')) || [];
+      messages.push(message);
+      localStorage.setItem('messages', JSON.stringify(messages));
+
+      alert('شكراً لرسالتك! سيتم الرد عليك قريباً');
+      e.target.reset();
+    }
+
+    function bookService(serviceName) {
+      document.getElementById('bookingService').value = serviceName;
+      scrollToSection('booking');
+    }
+
+    // ===== SCROLL FUNCTIONS =====
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function scrollToHome() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize
+    initPage();
+  </script>
+</body>
+</html>
