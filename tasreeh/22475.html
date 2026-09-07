@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تصريح جاهز للتنزيل</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; min-height: 100%; }
+body {
+    font-family: "Segoe UI", Tahoma, Arial, "Arial Unicode MS", sans-serif;
+    background: radial-gradient(circle at 50% 45%, rgba(24,55,78,.28), transparent 55%), linear-gradient(135deg, #081526 0%, #10253a 50%, #071326 100%);
+    min-height: 100vh; color: #fff; display: flex; justify-content: center; align-items: flex-start; padding: 52px 27px 80px;
+}
+.container { width: 100%; max-width: 640px; padding: 40px 32px 34px; text-align: center; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.075); border-radius: 48px; box-shadow: 0 22px 55px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.025); }
+h1 { font-size: 34px; line-height: 1.35; color: #fff; margin: 10px 0 16px; font-weight: 600; text-shadow: 0 2px 5px rgba(0,0,0,.3); }
+.subtitle { color: #a9b9c9; font-size: 18px; line-height: 1.85; margin: 0 8px 35px; }
+.permit-card { background: rgba(255,255,255,.052); border: 1px solid rgba(255,255,255,.105); border-radius: 25px; padding: 20px 22px 21px; margin-bottom: 16px; min-height: 124px; display: flex; flex-direction: column; justify-content: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.card-label { color: #8fa1b2; font-size: 16px; line-height: 1.4; margin-bottom: 7px; font-weight: 400; }
+.card-value { color: #fff; font-size: 27px; line-height: 1.35; font-weight: 700; letter-spacing: .15px; }
+.download-section { margin-top: 41px; }
+.download-btn { width: 100%; min-height: 98px; border: 0; border-radius: 25px; padding: 18px 28px; background: linear-gradient(135deg, #12b9aa 0%, #08a6e4 100%); color: #06192b; font-family: inherit; font-size: 22px; line-height: 1.35; font-weight: 700; cursor: pointer; box-shadow: 0 12px 30px rgba(0,184,215,.22); transition: transform .2s ease, filter .2s ease, box-shadow .2s ease; }
+.download-btn:hover { transform: translateY(-2px); filter: brightness(1.04); box-shadow: 0 15px 34px rgba(0,184,215,.28); }
+.download-btn:active { transform: translateY(0); }
+.info-text { color: #8194a7; font-size: 16px; line-height: 1.7; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.09); }
+@media (max-width: 600px) { body { padding: 52px 27px 70px; } .container { padding: 40px 32px 34px; border-radius: 48px; } }
+@media (max-width: 480px) { body { padding-left: 20px; padding-right: 20px; } .container { padding: 32px 20px 30px; border-radius: 42px; } h1 { font-size: 31px; } .subtitle { font-size: 16px; } .permit-card { min-height: 120px; padding: 18px; } .card-label { font-size: 15px; } .card-value { font-size: 25px; } .download-btn { min-height: 92px; font-size: 20px; } }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>تصريح جاهز للتنزيل</h1>
+    <p class="subtitle">استخدم الزر أدناه لتنزيل نسخة PDF الرسمية للتصريح.<br>يمكنك مشاركتها مع الجهات المعنية للتحقق.</p>
+
+    <div class="permit-card"><div class="card-label">رقم التصريح</div><div class="card-value">22475</div></div>
+    <div class="permit-card"><div class="card-label">الشركة</div><div class="card-value">نسیم الارجوان للنقل والتجهیز والخدمات العامة</div></div>
+    <div class="permit-card"><div class="card-label">تاريخ البدء</div><div class="card-value">2026/05/28</div></div>
+    <div class="permit-card"><div class="card-label">تاريخ الانتهاء</div><div class="card-value">2026/11/27</div></div>
+
+    <div class="download-section">
+        <button class="download-btn" onclick="downloadPDF()">اضغط لتنزيل التصريح (PDF)</button>
+        <p class="info-text">سيبدأ التنزيل مباشرة. إذا لم يبدأ، اضغط الزر مرة أخرى.</p>
+    </div>
+</div>
+<script>
+function downloadPDF() { window.location.href = 'https//:csd-n.vercel.app/tasreeh/22475.pdf'; }
+</script>
+</body>
+</html>
