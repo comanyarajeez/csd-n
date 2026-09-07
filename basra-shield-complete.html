@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="درع البصرة الحصين - شركة المقاولات العامة والمعدات الثقيلة - توفير أفضل خدمات القطاع النفطي والتشييد بالبصرة">
+  <meta name="keywords" content="مقاولات, معدات ثقيلة, حفريات, حفارات, بصرة, العراق">
+  <meta name="author" content="Basra Shield General Contracting Co.">
+  
+  <title>Basra Shield - درع البصرة الحصين | المقاولات العامة والمعدات الثقيلة</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+/* ============================================
+   BASRA SHIELD - PROFESSIONAL DARK WEBSITE
+   ============================================ */
+
+:root {
+  --primary: #1a1a1a;
+  --secondary: #0d0d0d;
+  --accent: #b8862f;
+  --accent-light: #d4a955;
+  --text-light: #ffffff;
+  --text-gray: #d0d0d0;
+  --border: #2a2a2a;
+  --shadow: rgba(0, 0, 0, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--primary);
+  color: var(--text-gray);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ========== HEADER & NAVBAR ========== */
+header {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+  border-bottom: 2px solid var(--accent);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+  filter: drop-shadow(0 2px 8px rgba(184, 134, 47, 0.3));
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text h1 {
+  font-size: 1.4rem;
+  color: var(--text-light);
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.logo-text p {
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.contact-btn {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+  color: var(--primary);
+  padding: 0.8rem 1.8rem;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(184, 134, 47, 0.4);
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+  margin-top: 70px;
+  position: relative;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(13, 13, 13, 0.9) 0%, rgba(26, 26, 26, 0.8) 100%);
+  z-index: 1;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  animation: zoomIn 8s ease-out;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(1.05); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--text-light);
+  animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 10px var(--shadow);
+}
+
+.hero-content .accent {
+  color: var(--accent);
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  color: var(--text-gray);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+  color: var(--primary);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(184, 134, 47, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+
+.btn-secondary:hover {
+  background: var(--accent);
+  color: var(--primary);
+  transform: translateY(-3px);
+}
+
+/* ========== SECTIONS ========== */
+section {
+  padding: 5rem 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+section h2 {
+  font-size: 2.5rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+}
+
+section h2 .accent {
+  color: var(--accent);
+}
+
+section p {
+  color: var(--text-gray);
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* ========== ABOUT SECTION ========== */
+.about {
+  background: var(--secondary);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.about-image {
+  position: relative;
+  height: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.about-image:hover img {
+  transform: scale(1.05);
+}
+
+.about-content h3 {
+  font-size: 1.8rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.about-content ul {
+  list-style: none;
+  margin: 1.5rem 0;
+}
+
+.about-content li {
+  color: var(--text-gray);
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.about-content li::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* ========== FLEET SECTION ========== */
+.fleet {
+  background: var(--primary);
+}
+
+.fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.fleet-card {
+  background: var(--secondary);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.fleet-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent);
+  box-shadow: 0 15px 40px rgba(184, 134, 47, 0.2);
+}
+
+.fleet-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.fleet-card:hover .fleet-image {
+  transform: scale(1.1);
+}
+
+.fleet-info {
+  padding: 1.5rem;
+}
+
+.fleet-info h3 {
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.fleet-info p {
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.fleet-specs {
+  font-size: 0.85rem;
+  color: var(--text-gray);
+  line-height: 1.8;
+}
+
+/* ========== SERVICES SECTION ========== */
+.services {
+  background: var(--secondary);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.service-card {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  padding: 2rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--accent);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(184, 134, 47, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(184, 134, 47, 0.15);
+}
+
+.service-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.service-card h3 {
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+/* ========== PROJECTS SECTION ========== */
+.projects {
+  background: var(--primary);
+}
+
+.project-slider {
+  position: relative;
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+.project-slides {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 300px;
+  group: 'projects';
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.9) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.1);
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-overlay h3 {
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.project-overlay p {
+  color: var(--accent);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ========== TESTIMONIALS ========== */
+.testimonials {
+  background: var(--secondary);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.testimonial-card {
+  background: var(--primary);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.testimonial-card::before {
+  content: '\"';
+  font-size: 4rem;
+  color: var(--accent);
+  opacity: 0.2;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.testimonial-text {
+  color: var(--text-gray);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.testimonial-author {
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.testimonial-company {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+/* ========== BLOG SECTION ========== */
+.blog {
+  background: var(--primary);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.blog-card {
+  background: var(--secondary);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-5px);
+}
+
+.blog-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.blog-content {
+  padding: 1.5rem;
+}
+
+.blog-date {
+  color: var(--accent);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-card h3 {
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.blog-excerpt {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.read-more {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.read-more:hover {
+  color: var(--accent-light);
+}
+
+/* ========== CONTACT SECTION ========== */
+.contact {
+  background: var(--secondary);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact-item {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.contact-icon {
+  font-size: 1.8rem;
+  color: var(--accent);
+  min-width: 30px;
+}
+
+.contact-item h3 {
+  color: var(--text-light);
+  margin-bottom: 0.3rem;
+}
+
+.contact-item p {
+  margin: 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background: var(--primary);
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  padding: 0.8rem;
+  border-radius: 5px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(184, 134, 47, 0.2);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+  color: var(--primary);
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(184, 134, 47, 0.4);
+}
+
+/* ========== FOOTER ========== */
+footer {
+  background: var(--secondary);
+  border-top: 2px solid var(--accent);
+  padding: 2rem 3rem;
+  margin-top: 3rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto 2rem;
+}
+
+.footer-section h3 {
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.footer-section p,
+.footer-section a {
+  color: var(--text-gray);
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  display: block;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: var(--accent);
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background: var(--accent);
+  color: var(--primary);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  text-align: center;
+  color: var(--text-gray);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  nav {
+    padding: 0.8rem 1.5rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  section {
+    padding: 3rem 1.5rem;
+  }
+
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fleet-grid,
+  .services-grid,
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text h1 {
+    font-size: 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- ========== HEADER & NAVBAR ========== -->
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 130'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%230e2a52;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23b8862f;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='50,10 85,35 85,85 50,110 15,85 15,35' fill='url(%23grad1)'/%3E%3Ccircle cx='50' cy='60' r='20' fill='%23ffffff' opacity='0.9'/%3E%3C/svg%3E" alt="Basra Shield Logo">
+        <div class="logo-text">
+          <h1>BASRA SHIELD</h1>
+          <p>General Contracting</p>
+        </div>
+      </div>
+      
+      <ul class="nav-links">
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="#about">عن الشركة</a></li>
+        <li><a href="#fleet">الأسطول</a></li>
+        <li><a href="#services">الخدمات</a></li>
+        <li><a href="#projects">المشاريع</a></li>
+        <li><a href="#blog">المدونة</a></li>
+        <li><a href="#contact">التواصل</a></li>
+      </ul>
+      
+      <button class="contact-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+        اطلب عرض سعر
+      </button>
+    </nav>
+  </header>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="home">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='heroGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231a1a1a;stop-opacity:0.8' /%3E%3Cstop offset='100%25' style='stop-color:%230d0d0d;stop-opacity:0.9' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='%23333333'/%3E%3Crect width='1200' height='800' fill='url(%23heroGrad)'/%3E%3Crect x='50' y='100' width='400' height='300' fill='%23b8862f' opacity='0.05'/%3E%3Crect x='700' y='400' width='350' height='250' fill='%23b8862f' opacity='0.03'/%3E%3C/svg%3E" alt="Hero Background" class="hero-bg">
+    
+    <div class="hero-content">
+      <h1>
+        خدمات المقاولات العامة و <span class="accent">المعدات الثقيلة</span>
+      </h1>
+      <p>توفير أفضل الحلول الهندسية والمعدات الحديثة لقطاع النفط والتشييد بالبصرة والعراق</p>
+      
+      <div class="cta-buttons">
+        <a href="#services" class="btn btn-primary">اكتشف الخدمات</a>
+        <a href="#contact" class="btn btn-secondary">اتصل بنا الآن</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section class="about" id="about">
+    <h2>عن <span class="accent">شركتنا</span></h2>
+    
+    <div class="about-grid">
+      <div class="about-image">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="aboutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#b8862f;stop-opacity:0.6" />
+              <stop offset="100%" style="stop-color:#0e2a52;stop-opacity:0.8" />
+            </linearGradient>
+          </defs>
+          <rect width="400" height="400" fill="#1a1a1a"/>
+          <rect width="400" height="400" fill="url(#aboutGrad)"/>
+          <circle cx="200" cy="200" r="150" fill="#ffffff" opacity="0.1"/>
+          <g transform="translate(200, 200)">
+            <rect x="-80" y="-80" width="160" height="160" fill="none" stroke="#b8862f" stroke-width="2"/>
+            <circle cx="0" cy="0" r="60" fill="none" stroke="#b8862f" stroke-width="2" opacity="0.5"/>
+            <text x="0" y="10" text-anchor="middle" font-size="24" fill="#b8862f" font-family="Arial">منذ</text>
+            <text x="0" y="40" text-anchor="middle" font-size="28" fill="#b8862f" font-family="Arial" font-weight="bold">2015</text>
+          </g>
+        </svg>
+      </div>
+      
+      <div class="about-content">
+        <h3>شركة متخصصة في المقاولات والمعدات الثقيلة</h3>
+        <p>
+          درع البصرة الحصين هي شركة رائدة متخصصة في تقديم خدمات المقاولات العامة والمعدات الثقيلة لقطاع النفط والتشييد. 
+          بتاريخ عريق منذ 2015 وخبرة عملية واسعة، نلتزم بتقديم أفضل الحلول الهندسية والخدمات المتكاملة.
+        </p>
+        
+        <h4 style="color: #b8862f; margin-top: 1.5rem; margin-bottom: 1rem;">ما يميزنا:</h4>
+        <ul>
+          <li>أسطول حديث من المعدات الثقيلة (حفارات، تحميل، تسوية)</li>
+          <li>فريق عمل مدرب ومؤهل بشهادات دولية</li>
+          <li>التزام صارم بمعايير الأمان والجودة</li>
+          <li>خدمات صيانة دورية وفعالة</li>
+          <li>تجربة واسعة في مشاريع كبرى</li>
+        </ul>
+        
+        <p style="margin-top: 1.5rem; color: #b8862f; font-weight: 600;">
+          العمل معنا يعني الموثوقية والجودة والالتزام بالمواعيد
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FLEET SECTION ========== -->
+  <section class="fleet" id="fleet">
+    <h2>أسطول <span class="accent">المعدات</span></h2>
+    
+    <div class="fleet-grid">
+      <div class="fleet-card">
+        <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" class="fleet-image">
+          <defs>
+            <linearGradient id="excavatorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#FF8C00" />
+              <stop offset="100%" style="stop-color:#FF6347" />
+            </linearGradient>
+          </defs>
+          <rect width="280" height="200" fill="#0d0d0d"/>
+          <rect width="280" height="200" fill="url(#excavatorGrad)" opacity="0.3"/>
+          <g transform="translate(140, 100)">
+            <ellipse cx="0" cy="40" rx="80" ry="30" fill="#333"/>
+            <polygon points="0,-30 30,-10 30,10 0,20 -30,10 -30,-10" fill="#FF8C00"/>
+            <circle cx="0" cy="0" r="12" fill="#666"/>
+            <rect x="-8" y="-25" width="16" height="20" fill="#FF8C00"/>
+          </g>
+          <text x="140" y="180" text-anchor="middle" font-size="16" fill="#b8862f" font-family="Arial" font-weight="bold">حفارات Hitachi</text>
+        </svg>
+        <div class="fleet-info">
+          <h3>حفارات Hitachi ZAXIS 200</h3>
+          <p>محرك فعال وقوي</p>
+          <div class="fleet-specs">
+            القوة: 200 حصان<br>
+            السعة: 15-20 م³<br>
+            الحالة: ممتازة جداً
+          </div>
+        </div>
+      </div>
+
+      <div class="fleet-card">
+        <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" class="fleet-image">
+          <defs>
+            <linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#FFD700" />
+              <stop offset="100%" style="stop-color:#FFA500" />
+            </linearGradient>
+          </defs>
+          <rect width="280" height="200" fill="#0d0d0d"/>
+          <rect width="280" height="200" fill="url(#loaderGrad)" opacity="0.3"/>
+          <g transform="translate(140, 100)">
+            <rect x="-60" y="20" width="120" height="30" fill="#333"/>
+            <circle cx="-40" cy="50" r="15" fill="#666"/>
+            <circle cx="40" cy="50" r="15" fill="#666"/>
+            <polygon points="-30,-20 -20,10 20,10 30,-20" fill="#FFD700"/>
+            <polygon points="-20,-10 -10,0 10,0 20,-10" fill="#FFA500"/>
+          </g>
+          <text x="140" y="180" text-anchor="middle" font-size="16" fill="#b8862f" font-family="Arial" font-weight="bold">تحميلات SDLG</text>
+        </svg>
+        <div class="fleet-info">
+          <h3>تحميلات SDLG LG953</h3>
+          <p>قدرة تحميل عالية جداً</p>
+          <div class="fleet-specs">
+            القوة: 250 حصان<br>
+            السعة: 5-6 م³<br>
+            الحالة: جيدة جداً
+          </div>
+        </div>
+      </div>
+
+      <div class="fleet-card">
+        <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" class="fleet-image">
+          <defs>
+            <linearGradient id="graderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#87CEEB" />
+              <stop offset="100%" style="stop-color:#4169E1" />
+            </linearGradient>
+          </defs>
+          <rect width="280" height="200" fill="#0d0d0d"/>
+          <rect width="280" height="200" fill="url(#graderGrad)" opacity="0.3"/>
+          <g transform="translate(140, 100)">
+            <rect x="-70" y="10" width="140" height="25" fill="#333"/>
+            <circle cx="-45" cy="35" r="12" fill="#666"/>
+            <circle cx="45" cy="35" r="12" fill="#666"/>
+            <line x1="-70" y1="0" x2="70" y2="0" stroke="#87CEEB" stroke-width="2"/>
+            <rect x="-60" y="-25" width="120" height="25" fill="#87CEEB" opacity="0.7"/>
+          </g>
+          <text x="140" y="180" text-anchor="middle" font-size="16" fill="#b8862f" font-family="Arial" font-weight="bold">مساويات Caterpillar</text>
+        </svg>
+        <div class="fleet-info">
+          <h3>مساويات Caterpillar 12G</h3>
+          <p>للتسوية والتسطيح الدقيق</p>
+          <div class="fleet-specs">
+            القوة: 130 حصان<br>
+            عرض الشفرة: 3.66 م<br>
+            الحالة: ممتازة
+          </div>
+        </div>
+      </div>
+
+      <div class="fleet-card">
+        <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" class="fleet-image">
+          <defs>
+            <linearGradient id="truckGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#8B4513" />
+              <stop offset="100%" style="stop-color:#A0522D" />
+            </linearGradient>
+          </defs>
+          <rect width="280" height="200" fill="#0d0d0d"/>
+          <rect width="280" height="200" fill="url(#truckGrad)" opacity="0.3"/>
+          <g transform="translate(140, 100)">
+            <polygon points="-70,0 -70,-30 -40,-40 40,-40 70,-30 70,0" fill="#666"/>
+            <rect x="-70" y="0" width="140" height="35" fill="#333"/>
+            <circle cx="-45" cy="35" r="18" fill="#666"/>
+            <circle cx="45" cy="35" r="18" fill="#666"/>
+            <circle cx="-35" cy="28" r="10" fill="#999"/>
+            <circle cx="55" cy="28" r="10" fill="#999"/>
+          </g>
+          <text x="140" y="180" text-anchor="middle" font-size="16" fill="#b8862f" font-family="Arial" font-weight="bold">شاحنات نقل</text>
+        </svg>
+        <div class="fleet-info">
+          <h3>شاحنات نقل المعدات</h3>
+          <p>نقل آمن وموثوق</p>
+          <div class="fleet-specs">
+            الحمولة: 30-50 طن<br>
+            نوع: Actros Mercedes<br>
+            الحالة: ممتازة
+          </div>
+        </div>
+      </div>
+
+      <div class="fleet-card">
+        <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" class="fleet-image">
+          <defs>
+            <linearGradient id="xGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#DC143C" />
+              <stop offset="100%" style="stop-color:#B22222" />
+            </linearGradient>
+          </defs>
+          <rect width="280" height="200" fill="#0d0d0d"/>
+          <rect width="280" height="200" fill="url(#xGrad)" opacity="0.3"/>
+          <g transform="translate(140, 100)">
+            <ellipse cx="0" cy="35" rx="75" ry="28" fill="#333"/>
+            <polygon points="0,-35 35,-10 35,15 0,25 -35,15 -35,-10" fill="#DC143C"/>
+            <circle cx="0" cy="0" r="14" fill="#666"/>
+            <rect x="-10" y="-30" width="20" height="25" fill="#DC143C"/>
+          </g>
+          <text x="140" y="180" text-anchor="middle" font-size="16" fill="#b8862f" font-family="Arial" font-weight="bold">آليات هيدروليكية</text>
+        </svg>
+        <div class="fleet-info">
+          <h3>آليات هيدروليكية متقدمة</h3>
+          <p>لأعمال التكسير والحفر</p>
+          <div class="fleet-specs">
+            القوة: 200-300 حصان<br>
+            السعة: متعددة<br>
+            الحالة: جيدة جداً
+          </div>
+        </div>
+      </div>
+
+      <div class="fleet-card">
+        <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" class="fleet-image">
+          <defs>
+            <linearGradient id="utilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#32CD32" />
+              <stop offset="100%" style="stop-color:#228B22" />
+            </linearGradient>
+          </defs>
+          <rect width="280" height="200" fill="#0d0d0d"/>
+          <rect width="280" height="200" fill="url(#utilGrad)" opacity="0.3"/>
+          <g transform="translate(140, 100)">
+            <rect x="-60" y="15" width="120" height="25" fill="#333"/>
+            <circle cx="-35" cy="40" r="12" fill="#666"/>
+            <circle cx="35" cy="40" r="12" fill="#666"/>
+            <polygon points="-45,-20 -20,-30 20,-30 45,-20" fill="#32CD32"/>
+          </g>
+          <text x="140" y="180" text-anchor="middle" font-size="16" fill="#b8862f" font-family="Arial" font-weight="bold">سيارات دعم</text>
+        </svg>
+        <div class="fleet-info">
+          <h3>سيارات الدعم والخدمة</h3>
+          <p>للصيانة والدعم الميداني</p>
+          <div class="fleet-specs">
+            الحمولة: 2-4 طن<br>
+            نوع: Hilux - Starex<br>
+            الحالة: جيدة
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES SECTION ========== -->
+  <section class="services" id="services">
+    <h2>خدمات <span class="accent">الشركة</span></h2>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">⛏️</div>
+        <h3>أعمال الحفر والتنقيب</h3>
+        <p>
+          توفير خدمات حفر احترافية عميقة وتنقيب عن الموارد الطبيعية باستخدام أحدث المعدات والتقنيات الحديثة
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🏗️</div>
+        <h3>المقاولات العامة</h3>
+        <p>
+          تنفيذ مشاريع البناء والتشييد الكبرى والمتوسطة بأعلى مستويات الجودة والأمان والالتزام بالجداول الزمنية
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🚜</div>
+        <h3>تأجير المعدات الثقيلة</h3>
+        <p>
+          خدمات تأجير شاملة للمعدات الثقيلة برسوم تنافسية وعقود مرنة تناسب احتياجات جميع العملاء
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>الصيانة الدورية</h3>
+        <p>
+          برامج صيانة شاملة وخدمات إصلاح فورية لضمان كفاءة المعدات والعمل دون توقف غير مخطط
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">👷</div>
+        <h3>الكوادر المدربة</h3>
+        <p>
+          فريق عمل محترف ومدرب على أعلى المستويات الدولية مع شهادات في الأمان والقيادة والصيانة
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <h3>الفحوصات والشهادات</h3>
+        <p>
+          برنامج فحص شامل واصدار شهادات الصلاحية والفحوصات الدورية وفقاً للمعايير الدولية الصارمة
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROJECTS SECTION ========== -->
+  <section class="projects" id="projects">
+    <h2>المشاريع <span class="accent">المُنجزة</span></h2>
+    
+    <div class="project-slider">
+      <div class="project-slides">
+        <div class="project-card">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" class="project-image">
+            <defs>
+              <linearGradient id="proj1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#8B7355" />
+                <stop offset="100%" style="stop-color:#654321" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#proj1)"/>
+            <rect x="20" y="50" width="360" height="120" fill="#D2B48C" opacity="0.6"/>
+            <circle cx="100" cy="120" r="30" fill="#FF8C00"/>
+            <polygon points="200,80 250,120 200,160 150,120" fill="#FFD700" opacity="0.8"/>
+          </svg>
+          <div class="project-overlay">
+            <h3>مشروع الحفريات الكبرى</h3>
+            <p>حفريات واسعة النطاق في منطقة الزبير</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" class="project-image">
+            <defs>
+              <linearGradient id="proj2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#4169E1" />
+                <stop offset="100%" style="stop-color:#1E90FF" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#proj2)"/>
+            <rect x="50" y="80" width="100" height="150" fill="#87CEEB" opacity="0.7"/>
+            <rect x="170" y="60" width="120" height="170" fill="#B0E0E6" opacity="0.7"/>
+            <rect x="310" y="100" width="70" height="130" fill="#ADD8E6" opacity="0.7"/>
+          </svg>
+          <div class="project-overlay">
+            <h3>أعمال البناء التشييد</h3>
+            <p>مشاريع تشييد متعددة الطوابق</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" class="project-image">
+            <defs>
+              <linearGradient id="proj3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#DAA520" />
+                <stop offset="100%" style="stop-color:#B8860B" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#proj3)"/>
+            <circle cx="100" cy="100" r="40" fill="#FF8C00" opacity="0.8"/>
+            <circle cx="300" cy="150" r="50" fill="#FFD700" opacity="0.7"/>
+            <rect x="50" y="200" width="300" height="60" fill="#8B4513" opacity="0.6"/>
+          </svg>
+          <div class="project-overlay">
+            <h3>مشاريع النفط والغاز</h3>
+            <p>أعمال متخصصة في قطاع النفط</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" class="project-image">
+            <defs>
+              <linearGradient id="proj4" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#228B22" />
+                <stop offset="100%" style="stop-color:#006400" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#proj4)"/>
+            <line x1="50" y1="150" x2="350" y2="150" stroke="#FFD700" stroke-width="20" opacity="0.6"/>
+            <rect x="80" y="100" width="240" height="100" fill="#90EE90" opacity="0.5"/>
+          </svg>
+          <div class="project-overlay">
+            <h3>أعمال تحضير المواقع</h3>
+            <p>تحضير وتسوية المواقع الصناعية</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" class="project-image">
+            <defs>
+              <linearGradient id="proj5" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#8B0000" />
+                <stop offset="100%" style="stop-color:#DC143C" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#proj5)"/>
+            <polygon points="200,50 350,150 300,280 100,280 50,150" fill="#FF6347" opacity="0.7"/>
+            <circle cx="200" cy="150" r="60" fill="#FFD700" opacity="0.6"/>
+          </svg>
+          <div class="project-overlay">
+            <h3>مشاريع حكومية</h3>
+            <p>تنفيذ مشاريع حكومية وبلدية</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" class="project-image">
+            <defs>
+              <linearGradient id="proj6" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#2F4F4F" />
+                <stop offset="100%" style="stop-color:#696969" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#proj6)"/>
+            <line x1="100" y1="50" x2="100" y2="250" stroke="#b8862f" stroke-width="25" opacity="0.8"/>
+            <line x1="200" y1="50" x2="200" y2="250" stroke="#b8862f" stroke-width="25" opacity="0.8"/>
+            <line x1="300" y1="50" x2="300" y2="250" stroke="#b8862f" stroke-width="25" opacity="0.8"/>
+          </svg>
+          <div class="project-overlay">
+            <h3>أعمال البنية التحتية</h3>
+            <p>تطوير البنية التحتية والطرق</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS SECTION ========== -->
+  <section class="stats" style="background: var(--secondary); padding: 5rem 3rem;">
+    <h2>إحصائيات <span class="accent">الشركة</span></h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-top: 2rem;">
+      <div style="text-align: center;">
+        <div style="font-size: 2.5rem; color: var(--accent); font-weight: bold; margin-bottom: 0.5rem;">
+          <span data-count="150">150</span>
+        </div>
+        <p style="color: var(--text-gray);">مشروع منفذ بنجاح</p>
+      </div>
+      
+      <div style="text-align: center;">
+        <div style="font-size: 2.5rem; color: var(--accent); font-weight: bold; margin-bottom: 0.5rem;">
+          <span data-count="25">25</span>
+        </div>
+        <p style="color: var(--text-gray);">معدة حديثة في الأسطول</p>
+      </div>
+      
+      <div style="text-align: center;">
+        <div style="font-size: 2.5rem; color: var(--accent); font-weight: bold; margin-bottom: 0.5rem;">
+          <span data-count="500">500</span>
+        </div>
+        <p style="color: var(--text-gray);">عامل مدرب ومؤهل</p>
+      </div>
+      
+      <div style="text-align: center;">
+        <div style="font-size: 2.5rem; color: var(--accent); font-weight: bold; margin-bottom: 0.5rem;">
+          <span data-count="98">98</span>%
+        </div>
+        <p style="color: var(--text-gray);">رضا العملاء</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIALS SECTION ========== -->
+  <section class="testimonials" id="testimonials">
+    <h2>آراء <span class="accent">العملاء</span></h2>
+    
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-text">
+          "الشركة توفر خدمات احترافية جداً، المعدات حديثة والعمال مدربين. تعاملنا معهم في عدة مشاريع والنتائج ممتازة جداً."
+        </div>
+        <div class="testimonial-author">المهندس علي حسن</div>
+        <div class="testimonial-company">شركة التطوير النفطي</div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-text">
+          "الالتزام بالمواعيد والجودة هو ما يميز درع البصرة الحصين. لا تتردد في التعامل معهم لأي مشروع"
+        </div>
+        <div class="testimonial-author">م. فاطمة محمد</div>
+        <div class="testimonial-company">إدارة المشاريع الحكومية</div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-text">
+          "أفضل شركة متخصصة في المعدات الثقيلة بالبصرة. معدات نظيفة، صيانة دورية، وأسعار معقولة جداً"
+        </div>
+        <div class="testimonial-author">أ. خالد عبدالله</div>
+        <div class="testimonial-company">شركة الإنشاءات والتعمير</div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-text">
+          "تجربة رائعة مع الفريق الاحترافي. الخدمة متميزة والنتائج فاقت التوقعات. نوصي بهم بشدة"
+        </div>
+        <div class="testimonial-author">م. يوسف محمود</div>
+        <div class="testimonial-company">قطاع الصيانة والتطوير</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BLOG SECTION ========== -->
+  <section class="blog" id="blog">
+    <h2>المدونة و <span class="accent">الأخبار</span></h2>
+    
+    <div class="blog-grid">
+      <div class="blog-card">
+        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" class="blog-image">
+          <defs>
+            <linearGradient id="blog1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1E90FF" />
+              <stop offset="100%" style="stop-color:#4169E1" />
+            </linearGradient>
+          </defs>
+          <rect width="400" height="250" fill="url(#blog1)"/>
+          <text x="200" y="125" text-anchor="middle" font-size="32" fill="#FFD700" font-family="Arial" font-weight="bold">أخبار جديدة</text>
+        </svg>
+        <div class="blog-content">
+          <div class="blog-date">15 سبتمبر 2026</div>
+          <h3>إضافة معدات جديدة حديثة للأسطول</h3>
+          <p class="blog-excerpt">
+            تم استقبال أحدث المعدات الحفارة من نوع Hitachi الموديل الجديد لتعزيز قدرات الشركة في تنفيذ المشاريع الكبرى...
+          </p>
+          <a href="#" class="read-more">اقرأ المزيد</a>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" class="blog-image">
+          <defs>
+            <linearGradient id="blog2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#228B22" />
+              <stop offset="100%" style="stop-color:#2E8B57" />
+            </linearGradient>
+          </defs>
+          <rect width="400" height="250" fill="url(#blog2)"/>
+          <text x="200" y="125" text-anchor="middle" font-size="32" fill="#FFD700" font-family="Arial" font-weight="bold">نصائح مهنية</text>
+        </svg>
+        <div class="blog-content">
+          <div class="blog-date">10 سبتمبر 2026</div>
+          <h3>نصائح الأمان عند استخدام المعدات الثقيلة</h3>
+          <p class="blog-excerpt">
+            إرشادات مهمة حول سلامة العمل مع المعدات الثقيلة والالتزام بمعايير الأمان الدولية...
+          </p>
+          <a href="#" class="read-more">اقرأ المزيد</a>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" class="blog-image">
+          <defs>
+            <linearGradient id="blog3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#FF8C00" />
+              <stop offset="100%" style="stop-color:#FFD700" />
+            </linearGradient>
+          </defs>
+          <rect width="400" height="250" fill="url(#blog3)"/>
+          <text x="200" y="125" text-anchor="middle" font-size="32" fill="#000" font-family="Arial" font-weight="bold">تحديث</text>
+        </svg>
+        <div class="blog-content">
+          <div class="blog-date">5 سبتمبر 2026</div>
+          <h3>برنامج الصيانة الدورية الجديد 2026</h3>
+          <p class="blog-excerpt">
+            تطبيق برنامج صيانة دوري محسّن لضمان أعلى مستويات كفاءة المعدات والعمل المتواصل...
+          </p>
+          <a href="#" class="read-more">اقرأ المزيد</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT SECTION ========== -->
+  <section class="contact" id="contact">
+    <h2>تواصل <span class="accent">معنا</span></h2>
+    
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h3>العنوان</h3>
+            <p>البصرة - الزبير - الشعيبة - منطقة محطة القطار</p>
+            <p style="font-size: 0.9rem; margin-top: 0.3rem;">البصرة، العراق</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h3>رقم الهاتف</h3>
+            <p>+964 782 323 8403</p>
+            <p>+964 782 169 6931</p>
+            <p>+964 782 650 8884</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <h3>البريد الإلكتروني</h3>
+            <p>basrafortifiedshield@gmail.com</p>
+            <p style="font-size: 0.9rem; margin-top: 0.3rem;">نرد على الاستعلامات خلال 24 ساعة</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">⏰</div>
+          <div>
+            <h3>ساعات العمل</h3>
+            <p>السبت - الخميس: 8:00 ص - 5:00 م</p>
+            <p>الجمعة والأحد: مغلق</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label for="name">اسمك الكامل *</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">البريد الإلكتروني *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">رقم الهاتف</label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+
+        <div class="form-group">
+          <label for="service">نوع الخدمة *</label>
+          <select name="service" id="service">
+            <option value="">-- اختر الخدمة --</option>
+            <option value="rental">تأجير معدات</option>
+            <option value="contracting">مقاولات</option>
+            <option value="maintenance">صيانة</option>
+            <option value="other">أخرى</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">رسالتك *</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">إرسال الرسالة</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h3>عن الشركة</h3>
+        <p>درع البصرة الحصين - شركة متخصصة في المقاولات العامة والمعدات الثقيلة بخبرة عريقة منذ 2015</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>الخدمات</h3>
+        <a href="#services">المقاولات العامة</a>
+        <a href="#services">تأجير المعدات</a>
+        <a href="#services">الصيانة الدورية</a>
+        <a href="#services">الفحوصات والشهادات</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>روابط مهمة</h3>
+        <a href="#about">عن الشركة</a>
+        <a href="#fleet">الأسطول</a>
+        <a href="#projects">المشاريع</a>
+        <a href="#blog">المدونة</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>تواصل معنا</h3>
+        <p>📞 +964 782 323 8403</p>
+        <p>📧 basrafortifiedshield@gmail.com</p>
+        <div class="social-links">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Twitter">𝕏</a>
+          <a href="#" title="Instagram">📷</a>
+          <a href="#" title="LinkedIn">in</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Basra Shield General Contracting Co. جميع الحقوق محفوظة | تصميم احترافي</p>
+    </div>
+  </footer>
+
+  <script>
+    // معالج نموذج التواصل
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      alert('شكراً على رسالتك! سيتم التواصل معك قريباً.');
+      event.target.reset();
+    }
+
+    // تأثير العداد للأرقام
+    document.addEventListener('DOMContentLoaded', function() {
+      const counters = document.querySelectorAll('[data-count]');
+      
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        let current = 0;
+        const increment = target / 50;
+        
+        const updateCounter = () => {
+          current += increment;
+          if (current < target) {
+            counter.textContent = Math.floor(current);
+            setTimeout(updateCounter, 30);
+          } else {
+            counter.textContent = target;
+          }
+        };
+        
+        updateCounter();
+      });
+    });
+  </script>
+</body>
+</html>
